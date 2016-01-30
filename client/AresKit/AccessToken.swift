@@ -10,6 +10,11 @@ public struct AccessToken: CustomStringConvertible, JSONDeserializable {
     public let username: String
     public let token: String
     
+    internal init(username: String, token: String) {
+        self.username = username
+        self.token = token
+    }
+    
     // MARK: CustomStringConvertible
     
     public var description: String {

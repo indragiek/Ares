@@ -39,6 +39,10 @@
 		721C79D61C5D7276008EFF59 /* CreatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79D41C5D7276008EFF59 /* CreatedUser.swift */; };
 		721C79D91C5D7418008EFF59 /* LoginWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79D71C5D7418008EFF59 /* LoginWindowController.swift */; };
 		721C79DA1C5D7418008EFF59 /* LoginWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721C79D81C5D7418008EFF59 /* LoginWindowController.xib */; };
+		721C79DC1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79DB1C5D78B7008EFF59 /* CredentialStorage.swift */; };
+		721C79DD1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79DB1C5D78B7008EFF59 /* CredentialStorage.swift */; };
+		721C79F31C5D7969008EFF59 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79F21C5D7969008EFF59 /* Keychain.swift */; };
+		721C79F41C5D7969008EFF59 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79F21C5D7969008EFF59 /* Keychain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +177,8 @@
 		721C79D41C5D7276008EFF59 /* CreatedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatedUser.swift; sourceTree = "<group>"; };
 		721C79D71C5D7418008EFF59 /* LoginWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginWindowController.swift; path = AresKit/LoginWindowController.swift; sourceTree = SOURCE_ROOT; };
 		721C79D81C5D7418008EFF59 /* LoginWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginWindowController.xib; path = AresKit/LoginWindowController.xib; sourceTree = SOURCE_ROOT; };
+		721C79DB1C5D78B7008EFF59 /* CredentialStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialStorage.swift; sourceTree = "<group>"; };
+		721C79F21C5D7969008EFF59 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keychain.swift; path = External/KeychainAccess/Lib/KeychainAccess/Keychain.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +279,8 @@
 				721C79CE1C5D64F2008EFF59 /* JSONDeserializable.swift */,
 				721C79D11C5D6514008EFF59 /* AccessToken.swift */,
 				721C79D41C5D7276008EFF59 /* CreatedUser.swift */,
+				721C79DB1C5D78B7008EFF59 /* CredentialStorage.swift */,
+				721C79F21C5D7969008EFF59 /* Keychain.swift */,
 			);
 			path = AresKit;
 			sourceTree = "<group>";
@@ -564,7 +572,9 @@
 				721C79A61C5D62A3008EFF59 /* Client.swift in Sources */,
 				721C79D51C5D7276008EFF59 /* CreatedUser.swift in Sources */,
 				721C79CF1C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */,
+				721C79DC1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */,
 				721C79D21C5D6514008EFF59 /* AccessToken.swift in Sources */,
+				721C79F31C5D7969008EFF59 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +586,9 @@
 				721C79A71C5D62A3008EFF59 /* Client.swift in Sources */,
 				721C79D61C5D7276008EFF59 /* CreatedUser.swift in Sources */,
 				721C79D01C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */,
+				721C79DD1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */,
 				721C79D31C5D6514008EFF59 /* AccessToken.swift in Sources */,
+				721C79F41C5D7969008EFF59 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
