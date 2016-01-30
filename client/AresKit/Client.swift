@@ -93,11 +93,7 @@ public final class Client {
                                result = json["result"] as? JSONDictionary where success {
                             completionHandler(.Success(result))
                         } else {
-                            var userInfo = [String: AnyObject]()
-                            if let error = json["error"] as? String {
-                                userInfo[self.dynamicType.APIErrorKey] = error
-                            }
-                            let error = NSError(domain: self.dynamicType.ErrorDomain, code: ErrorCode.APIError.rawValue, userInfo: userInfo)
+                            let error = self.dynamicType.constructAPIErrorFromJSON(json)
                             completionHandler(.Failure(error))
                         }
                     } else {
@@ -107,5 +103,28 @@ public final class Client {
                     completionHandler(.Failure(error))
                 }
             }
+    }
+    
+    private static func constructAPIErrorFromJSON(json: JSONDictionary) -> NSError {
+        var userInfo = [String: AnyObject]()
+        if let error = json["error"] as? String {
+            userInfo[APIErrorKey] = error
+            if let description = localizedDescriptionForAPIError(error) {
+                userInfo[NSLocalizedDescriptionKey] = description
+            }
+        }
+        return NSError(domain: ErrorDomain, code: ErrorCode.APIError.rawValue, userInfo: userInfo)
+    }
+}
+
+private func localizedDescriptionForAPIError(error: String) -> String? {
+    switch error {
+    case "USER_EXISTS":
+        return "A user with the specified username already exists.";
+    case "USER_DOES_NOT_EXIST":
+        return "A user with the specified username does not exist.";
+    case "PASSWORD_INCORRECT":
+        return "The specified password is incorrect.";
+    default: return nil
     }
 }
