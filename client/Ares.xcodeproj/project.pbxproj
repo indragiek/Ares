@@ -29,6 +29,12 @@
 		721C79C41C5D63BF008EFF59 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 721C79B81C5D63A1008EFF59 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		721C79C71C5D63C6008EFF59 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721C79B41C5D63A1008EFF59 /* Alamofire.framework */; };
 		721C79C81C5D63C6008EFF59 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 721C79B41C5D63A1008EFF59 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		721C79CC1C5D642F008EFF59 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79CB1C5D642F008EFF59 /* User.swift */; };
+		721C79CD1C5D642F008EFF59 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79CB1C5D642F008EFF59 /* User.swift */; };
+		721C79CF1C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79CE1C5D64F2008EFF59 /* JSONDeserializable.swift */; };
+		721C79D01C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79CE1C5D64F2008EFF59 /* JSONDeserializable.swift */; };
+		721C79D21C5D6514008EFF59 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79D11C5D6514008EFF59 /* AccessToken.swift */; };
+		721C79D31C5D6514008EFF59 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79D11C5D6514008EFF59 /* AccessToken.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +163,9 @@
 		721C79961C5D4301008EFF59 /* AresKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AresKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		721C79A51C5D62A3008EFF59 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		721C79A91C5D63A1008EFF59 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = External/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		721C79CB1C5D642F008EFF59 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		721C79CE1C5D64F2008EFF59 /* JSONDeserializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDeserializable.swift; sourceTree = "<group>"; };
+		721C79D11C5D6514008EFF59 /* AccessToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +260,9 @@
 				721C79861C5D42DE008EFF59 /* AresKit.h */,
 				721C79881C5D42DE008EFF59 /* Info.plist */,
 				721C79A51C5D62A3008EFF59 /* Client.swift */,
+				721C79CB1C5D642F008EFF59 /* User.swift */,
+				721C79CE1C5D64F2008EFF59 /* JSONDeserializable.swift */,
+				721C79D11C5D6514008EFF59 /* AccessToken.swift */,
 			);
 			path = AresKit;
 			sourceTree = "<group>";
@@ -536,7 +548,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				721C79CC1C5D642F008EFF59 /* User.swift in Sources */,
 				721C79A61C5D62A3008EFF59 /* Client.swift in Sources */,
+				721C79CF1C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */,
+				721C79D21C5D6514008EFF59 /* AccessToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,7 +559,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				721C79CD1C5D642F008EFF59 /* User.swift in Sources */,
 				721C79A71C5D62A3008EFF59 /* Client.swift in Sources */,
+				721C79D01C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */,
+				721C79D31C5D6514008EFF59 /* AccessToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
