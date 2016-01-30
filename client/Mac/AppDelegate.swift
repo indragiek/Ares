@@ -13,19 +13,21 @@ import AresKit
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
-    private var client: Client!
+    private var loginWindowController: LoginWindowController!
 
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        client = Client(URL: NSURL(string: "http://localhost:5000")!)
-        client.authenticate(User(username: "indragie", password: "pass")) {
-            switch $0 {
-            case let .Success(token):
-                print(token)
-            case let .Failure(error):
-                print(error)
-            }
-        }
+        loginWindowController = LoginWindowController(windowNibName: "LoginWindowController")
+        loginWindowController.showWindow(nil)
+//        client = Client(URL: NSURL(string: "http://localhost:5000")!)
+//        client.authenticate(User(username: "indragie", password: "pass")) {
+//            switch $0 {
+//            case let .Success(token):
+//                print(token)
+//            case let .Failure(error):
+//                print(error)
+//            }
+//        }
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
