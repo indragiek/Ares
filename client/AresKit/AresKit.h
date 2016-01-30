@@ -6,7 +6,7 @@
 //  Copyright © 2016 Indragie Karunaratne. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for AresKit.
 FOUNDATION_EXPORT double AresKitVersionNumber;
