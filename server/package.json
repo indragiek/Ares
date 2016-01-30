@@ -1,0 +1,27 @@
+{
+  "name": "ares-server",
+  "version": "1.0.0",
+  "description": "Back-end for the Ares file transfer service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indragiek/Ares.git"
+  },
+  "keywords": [
+    "ios",
+    "mac",
+    "file",
+    "transfer",
+    "bluetooth",
+    "wifi"
+  ],
+  "author": "Indragie Karunaratne",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/indragiek/Ares/issues"
+  },
+  "homepage": "https://github.com/indragiek/Ares#readme"
+}
