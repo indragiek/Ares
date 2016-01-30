@@ -12,7 +12,7 @@ private let ServiceName = "com.indragie.ares"
 private let UserDefaultsUsernameKey = "username"
 
 public final class CredentialStorage {
-    static let sharedInstance = CredentialStorage()
+    public static let sharedInstance = CredentialStorage()
     private let keychain: Keychain
     
     private init() {
@@ -20,7 +20,7 @@ public final class CredentialStorage {
     }
     
     private var _activeToken: AccessToken?
-    var activeToken: AccessToken? {
+    public var activeToken: AccessToken? {
         get {
             if let accessToken = _activeToken {
                 return accessToken

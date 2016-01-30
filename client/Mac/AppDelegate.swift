@@ -10,30 +10,50 @@ import Cocoa
 import AresKit
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, LoginWindowControllerDelegate {
 
     @IBOutlet weak var window: NSWindow!
+    private var credentialStorage: CredentialStorage!
+    private var client: Client!
     private var loginWindowController: LoginWindowController!
 
-
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        credentialStorage = CredentialStorage.sharedInstance
+        client = Client(URL: NSURL(string: "http://localhost:5000")!)
+        if credentialStorage.activeToken != nil {
+            setupStatusBarItem()
+        } else {
+            showLoginWindowController()
+        }
+    }
+    
+    func showLoginWindowController() {
         loginWindowController = LoginWindowController(windowNibName: "LoginWindowController")
+        loginWindowController.client = client
+        loginWindowController.delegate = self
         loginWindowController.showWindow(nil)
-//        client = Client(URL: NSURL(string: "http://localhost:5000")!)
-//        client.authenticate(User(username: "indragie", password: "pass")) {
-//            switch $0 {
-//            case let .Success(token):
-//                print(token)
-//            case let .Failure(error):
-//                print(error)
-//            }
-//        }
+    }
+    
+    func tearDownLoginWindowController() {
+        loginWindowController.window?.orderOut(nil)
+        loginWindowController = nil
+    }
+    
+    func setupStatusBarItem() {
+        guard let accessToken = credentialStorage.activeToken else {
+            fatalError("Cannot set up status bar item without access token")
+        }
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+    // MARK: LoginWindowControllerDelegate
+    
+    func loginWindowController(controller: LoginWindowController, authenticatedWithToken token: AccessToken) {
+        credentialStorage.activeToken = token
+        tearDownLoginWindowController()
+        setupStatusBarItem()
     }
-
-
+    
+    func loginWindowController(controller: LoginWindowController, failedToAuthenticateWithError error: NSError) {
+        NSApp.presentError(error)
+    }
 }
-
