@@ -41,7 +41,7 @@ app.post('/register', function(req, res, next) {
         } else {
             res.json({ 
                 success: true, 
-                user: result.ops[0]
+                result: result.ops[0]
             });
         }
     });
@@ -83,7 +83,7 @@ app.post('/authenticate', function(req, res, next) {
             });
             res.json({
                 success: true,
-                token: token
+                result: { token: token }
             });
         }
     });
