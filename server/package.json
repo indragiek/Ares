@@ -23,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/indragiek/Ares/issues"
   },
-  "homepage": "https://github.com/indragiek/Ares#readme"
+  "homepage": "https://github.com/indragiek/Ares#readme",
+  "dependencies": {
+    "apn": "^1.7.5",
+    "express": "^4.13.4",
+    "kerberos": "~0.0.17",
+    "mongodb": "^2.1.4",
+    "ws": "^1.0.1"
+  }
 }
