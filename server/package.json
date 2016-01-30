@@ -26,6 +26,9 @@
   "homepage": "https://github.com/indragiek/Ares#readme",
   "dependencies": {
     "apn": "^1.7.5",
+    "async": "^1.5.2",
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.2",
     "express": "^4.13.4",
     "kerberos": "~0.0.17",
     "mongodb": "^2.1.4",
