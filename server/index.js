@@ -41,7 +41,7 @@ app.post('/register', function(req, res, next) {
         } else {
             res.json({ 
                 success: true, 
-                result: result.ops[0]
+                result: { username: result.ops[0].username }
             });
         }
     });

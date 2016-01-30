@@ -20,14 +20,14 @@ public final class Client {
     private let manager: Manager
     private let URL: NSURL
     
-    init(URL: NSURL, configuration: NSURLSessionConfiguration = .defaultSessionConfiguration()) {
+    public init(URL: NSURL, configuration: NSURLSessionConfiguration = .defaultSessionConfiguration()) {
         self.URL = URL
         self.manager = Manager(configuration: configuration)
     }
     
     // MARK: API
     
-    func register(user: User, completionHandler: Result<User, NSError> -> Void) {
+    public func register(user: User, completionHandler: Result<CreatedUser, NSError> -> Void) {
         let request = Request(
             method: .POST,
             path: "/register",
@@ -39,7 +39,7 @@ public final class Client {
         requestModel(request, completionHandler: completionHandler)
     }
     
-    func authenticate(user: User, completionHandler: Result<AccessToken, NSError> -> Void) {
+    public func authenticate(user: User, completionHandler: Result<AccessToken, NSError> -> Void) {
         let request = Request(
             method: .POST,
             path: "/authenticate",
@@ -85,7 +85,6 @@ public final class Client {
             fatalError("Unable to construct request URL")
         }
         manager.request(request.method, requestURL, parameters: request.parameters, encoding: .URL)
-            .validate()
             .responseJSON { response in
                 switch response.result {
                 case let .Success(responseObject):

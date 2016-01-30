@@ -1,27 +1,27 @@
 //
-//  AccessToken.swift
+//  CreatedUser.swift
 //  Ares
 //
 //  Created by Indragie on 1/30/16.
 //  Copyright © 2016 Indragie Karunaratne. All rights reserved.
 //
 
-public struct AccessToken: CustomStringConvertible, JSONDeserializable {
-    public let token: String
+public struct CreatedUser: CustomStringConvertible, JSONDeserializable {
+    public let username: String
     
     // MARK: CustomStringConvertible
     
     public var description: String {
-        return "AccessToken{token=\(token)}"
+        return "CreatedUser{username=\(username)}"
     }
     
     // MARK: JSONDeserializable
     
     public init?(JSON: JSONDictionary) {
-        if let token = JSON["token"] as? String {
-            self.token = token
+        if let username = JSON["username"] as? String {
+            self.username = username
         } else {
-            self.token = ""
+            self.username = ""
             return nil
         }
     }

@@ -35,6 +35,8 @@
 		721C79D01C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79CE1C5D64F2008EFF59 /* JSONDeserializable.swift */; };
 		721C79D21C5D6514008EFF59 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79D11C5D6514008EFF59 /* AccessToken.swift */; };
 		721C79D31C5D6514008EFF59 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79D11C5D6514008EFF59 /* AccessToken.swift */; };
+		721C79D51C5D7276008EFF59 /* CreatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79D41C5D7276008EFF59 /* CreatedUser.swift */; };
+		721C79D61C5D7276008EFF59 /* CreatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79D41C5D7276008EFF59 /* CreatedUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +168,7 @@
 		721C79CB1C5D642F008EFF59 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		721C79CE1C5D64F2008EFF59 /* JSONDeserializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDeserializable.swift; sourceTree = "<group>"; };
 		721C79D11C5D6514008EFF59 /* AccessToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		721C79D41C5D7276008EFF59 /* CreatedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatedUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +266,7 @@
 				721C79CB1C5D642F008EFF59 /* User.swift */,
 				721C79CE1C5D64F2008EFF59 /* JSONDeserializable.swift */,
 				721C79D11C5D6514008EFF59 /* AccessToken.swift */,
+				721C79D41C5D7276008EFF59 /* CreatedUser.swift */,
 			);
 			path = AresKit;
 			sourceTree = "<group>";
@@ -550,6 +554,7 @@
 			files = (
 				721C79CC1C5D642F008EFF59 /* User.swift in Sources */,
 				721C79A61C5D62A3008EFF59 /* Client.swift in Sources */,
+				721C79D51C5D7276008EFF59 /* CreatedUser.swift in Sources */,
 				721C79CF1C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */,
 				721C79D21C5D6514008EFF59 /* AccessToken.swift in Sources */,
 			);
@@ -561,6 +566,7 @@
 			files = (
 				721C79CD1C5D642F008EFF59 /* User.swift in Sources */,
 				721C79A71C5D62A3008EFF59 /* Client.swift in Sources */,
+				721C79D61C5D7276008EFF59 /* CreatedUser.swift in Sources */,
 				721C79D01C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */,
 				721C79D31C5D6514008EFF59 /* AccessToken.swift in Sources */,
 			);

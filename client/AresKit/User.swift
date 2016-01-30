@@ -6,21 +6,18 @@
 //  Copyright © 2016 Indragie Karunaratne. All rights reserved.
 //
 
-public struct User: JSONDeserializable {
+public struct User: CustomStringConvertible {
     public let username: String
     public let password: String
     
-    // MARK: JSONDeserializable
+    public init(username: String, password: String) {
+        self.username = username
+        self.password = password
+    }
     
-    public init?(JSON: JSONDictionary) {
-        if let username = JSON["username"] as? String,
-               password = JSON["password"] as? String {
-            self.username = username
-            self.password = password
-        } else {
-            self.username = ""
-            self.password = ""
-            return nil
-        }
+    // MARK: CustomStringConvertible
+    
+    public var description: String {
+        return "User{username=\(username), password=\(password)}"
     }
 }
