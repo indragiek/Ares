@@ -48,9 +48,11 @@ app.post('/register', function(req, res, next) {
 });
 
 app.post('/authenticate', function(req, res, next) {
+    var username = req.body.username;
+
     async.waterfall([
         connectMongoDB,
-        async.apply(getUser, req.body.username),
+        async.apply(getUser, username),
         function(user, callback) {
             if (user) {
                 callback(null, user);
@@ -83,7 +85,10 @@ app.post('/authenticate', function(req, res, next) {
             });
             res.json({
                 success: true,
-                result: { token: token }
+                result: { 
+                    username: username,
+                    token: token 
+                }
             });
         }
     });

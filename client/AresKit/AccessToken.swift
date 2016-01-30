@@ -7,20 +7,24 @@
 //
 
 public struct AccessToken: CustomStringConvertible, JSONDeserializable {
+    public let username: String
     public let token: String
     
     // MARK: CustomStringConvertible
     
     public var description: String {
-        return "AccessToken{token=\(token)}"
+        return "AccessToken{username=\(username), token=\(token)}"
     }
     
     // MARK: JSONDeserializable
     
     public init?(JSON: JSONDictionary) {
-        if let token = JSON["token"] as? String {
+        if let username = JSON["username"] as? String,
+               token = JSON["token"] as? String {
+            self.username = username
             self.token = token
         } else {
+            self.username = ""
             self.token = ""
             return nil
         }
