@@ -1,5 +1,5 @@
 //
-//  DevicesManager.swift
+//  ConnectionManager.swift
 //  Ares
 //
 //  Created by Indragie on 1/30/16.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-public protocol DevicesManagerDelegate: AnyObject {
-    func devicesManager(manager: DevicesManager, didUpdateDevices devices: [Device])
-    func devicesManager(manager: DevicesManager, didFailWithError error: NSError)
+public protocol ConnectionManagerDelegate: AnyObject {
+    func connectionManager(manager: ConnectionManager, didUpdateDevices devices: [Device])
+    func connectionManager(manager: ConnectionManager, didFailWithError error: NSError)
 }
 
 public struct Device: CustomStringConvertible {
@@ -28,17 +28,17 @@ public struct Device: CustomStringConvertible {
     public let availability: Availability
 }
 
-public final class DevicesManager {
+public final class ConnectionManager {
     private let client: Client
     private let token: AccessToken
     
     private(set) public var devices = [Device]() {
         didSet {
-            delegate?.devicesManager(self, didUpdateDevices: devices)
+            delegate?.connectionManager(self, didUpdateDevices: devices)
         }
     }
     
-    public weak var delegate: DevicesManagerDelegate?
+    public weak var delegate: ConnectionManagerDelegate?
     
     public init(client: Client, token: AccessToken) {
         self.client = client
@@ -56,8 +56,12 @@ public final class DevicesManager {
                         Device(registeredDevice: $0, availability: .None)
                     }
             case let .Failure(error):
-                self.delegate?.devicesManager(self, didFailWithError: error)
+                self.delegate?.connectionManager(self, didFailWithError: error)
             }
         }
+    }
+    
+    public func startAdvertising() {
+        
     }
 }
