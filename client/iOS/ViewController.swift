@@ -9,7 +9,7 @@
 import UIKit
 import AresKit
 
-class ViewController: UIViewController, LoginViewControllerDelegate {
+class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionManagerDelegate, IncomingFileTransferDelegate {
     private let credentialStorage: CredentialStorage
     private let apnsManager: APNSManager
     private let client: Client
@@ -55,6 +55,8 @@ class ViewController: UIViewController, LoginViewControllerDelegate {
     
     private func completeSetupWithToken(token: AccessToken) {
         let connectionManager = ConnectionManager(client: client, token: token)
+        connectionManager.delegate = self
+        connectionManager.incomingFileTransferDelegate = self
         connectionManager.getDeviceList {
             connectionManager.startMonitoring()
             
@@ -81,5 +83,33 @@ class ViewController: UIViewController, LoginViewControllerDelegate {
         completeSetupWithToken(token)
         
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: ConnectionManagerDelegate
+    
+    func connectionManager(manager: ConnectionManager, willBeginOutgoingFileTransfer transfer: OutgoingFileTransfer) {}
+    
+    func connectionManager(manager: ConnectionManager, willBeginIncomingFileTransfer transfer: IncomingFileTransfer) {
+        print("Receiving \(transfer.context.filePath)")
+    }
+    
+    func connectionManager(manager: ConnectionManager, didFailWithError error: NSError) {
+        print(error)
+    }
+    
+    func connectionManager(manager: ConnectionManager, didUpdateDevices devices: [Device]) {}
+    
+    // MARK: IncomingFileTransferDelegate
+    
+    func incomingFileTransfer(transfer: IncomingFileTransfer, didStartReceivingFileWithName name: String, progress: NSProgress) {
+        print("Started receiving \(name)")
+    }
+    
+    func incomingFileTransfer(transfer: IncomingFileTransfer, didFailToReceiveFileWithName name: String, error: NSError) {
+        print("Failed to receive \(name): \(error)")
+    }
+    
+    func incomingFileTransfer(transfer: IncomingFileTransfer, didReceiveFileWithName name: String, URL: NSURL) {
+        print("Received \(name) at \(URL)")
     }
 }

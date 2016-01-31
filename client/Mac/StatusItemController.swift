@@ -9,7 +9,7 @@
 import Cocoa
 import AresKit
 
-@objc final class StatusItemController: NSObject, ConnectionManagerDelegate, NSWindowDelegate {
+@objc final class StatusItemController: NSObject, ConnectionManagerDelegate, OutgoingFileTransferDelegate, NSWindowDelegate {
     let statusItem: NSStatusItem
     private let client: Client
     private let token: AccessToken
@@ -25,6 +25,7 @@ import AresKit
         super.init()
         
         connectionManager.delegate = self
+        connectionManager.outgoingFileTransferDelegate = self
         connectionManager.getDeviceList {
             self.connectionManager.startMonitoring()
         }
@@ -79,6 +80,20 @@ import AresKit
     
     func connectionManager(manager: ConnectionManager, willBeginOutgoingFileTransfer transfer: OutgoingFileTransfer) {
         print("Sending \(transfer.context.filePath)")
+    }
+    
+    // MARK: OutgoingFileTransferDelegate
+    
+    func outgoingFileTransfer(transfer: OutgoingFileTransfer, didStartWithProgress progress: NSProgress) {
+        print("Sending \(transfer.context.filePath) with \(progress)")
+    }
+    
+    func outgoingFileTransfer(transfer: OutgoingFileTransfer, didFailWithError error: NSError) {
+        print("Sending \(transfer.context.filePath) failed: \(error)")
+    }
+    
+    func outgoingFileTransferDidComplete(transfer: OutgoingFileTransfer) {
+        print("Sending \(transfer.context.filePath) succeeded")
     }
     
     // MARK: Drag and Drop

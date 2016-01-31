@@ -30,6 +30,7 @@ public protocol OutgoingFileTransferDelegate: AnyObject {
         super.init()
         
         self.session.delegate = self
+        print(self.session.connectedPeers)
     }
     
     // MARK: MCSessionDelegate
@@ -53,11 +54,15 @@ public protocol OutgoingFileTransferDelegate: AnyObject {
         }
     }
     
+    public func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void) {
+        guard peerID == remotePeerID else { return }
+        certificateHandler(true)
+    }
+    
     // Unused
     
     public func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {}
     public func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
-    public func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void) {}
     public func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress) {}
     public func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?) {}
 }

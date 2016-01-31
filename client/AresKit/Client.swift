@@ -162,7 +162,6 @@ public final class Client {
                 switch response.result {
                 case let .Success(responseObject):
                     if let json = responseObject as? JSONDictionary {
-                        print(json)
                         if let success = json["success"] as? Bool,
                                result = json["result"] where success {
                             completionHandler(.Success(result))
