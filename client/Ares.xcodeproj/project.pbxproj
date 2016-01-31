@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7203D1BE1C5D9F690011E3F0 /* APNSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1BD1C5D9F690011E3F0 /* APNSManager.swift */; };
+		7203D1C01C5DA0CD0011E3F0 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */; };
 		721C793F1C5D41D1008EFF59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C793C1C5D41D1008EFF59 /* AppDelegate.swift */; };
 		721C79401C5D41D1008EFF59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 721C793D1C5D41D1008EFF59 /* Assets.xcassets */; };
 		721C79441C5D41DD008EFF59 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721C79421C5D41DD008EFF59 /* MainMenu.xib */; };
@@ -14,7 +16,6 @@
 		721C79761C5D428E008EFF59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 721C79721C5D428E008EFF59 /* Assets.xcassets */; };
 		721C79781C5D428E008EFF59 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79741C5D428E008EFF59 /* ViewController.swift */; };
 		721C797D1C5D4294008EFF59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 721C79791C5D4294008EFF59 /* LaunchScreen.storyboard */; };
-		721C797E1C5D4294008EFF59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 721C797B1C5D4294008EFF59 /* Main.storyboard */; };
 		721C79871C5D42DE008EFF59 /* AresKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 721C79861C5D42DE008EFF59 /* AresKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		721C798B1C5D42DE008EFF59 /* AresKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721C79841C5D42DE008EFF59 /* AresKit.framework */; };
 		721C798C1C5D42DE008EFF59 /* AresKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 721C79841C5D42DE008EFF59 /* AresKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -158,6 +159,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7203D1BD1C5D9F690011E3F0 /* APNSManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APNSManager.swift; path = iOS/APNSManager.swift; sourceTree = SOURCE_ROOT; };
+		7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDataExtensions.swift; path = iOS/NSDataExtensions.swift; sourceTree = SOURCE_ROOT; };
 		721C792C1C5D418C008EFF59 /* Ares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ares.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		721C793C1C5D41D1008EFF59 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Mac/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		721C793D1C5D41D1008EFF59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Mac/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -169,7 +172,6 @@
 		721C79731C5D428E008EFF59 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iOS/Info.plist; sourceTree = SOURCE_ROOT; };
 		721C79741C5D428E008EFF59 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = iOS/ViewController.swift; sourceTree = SOURCE_ROOT; };
 		721C797A1C5D4294008EFF59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = iOS/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
-		721C797C1C5D4294008EFF59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = iOS/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		721C79841C5D42DE008EFF59 /* AresKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AresKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		721C79861C5D42DE008EFF59 /* AresKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AresKit.h; sourceTree = "<group>"; };
 		721C79881C5D42DE008EFF59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -272,10 +274,11 @@
 				721C79731C5D428E008EFF59 /* Info.plist */,
 				721C79741C5D428E008EFF59 /* ViewController.swift */,
 				721C79791C5D4294008EFF59 /* LaunchScreen.storyboard */,
-				721C797B1C5D4294008EFF59 /* Main.storyboard */,
 				721C79F91C5D843E008EFF59 /* LoginViewController.swift */,
 				721C79FA1C5D843E008EFF59 /* LoginViewController.xib */,
 				721C79FD1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift */,
+				7203D1BD1C5D9F690011E3F0 /* APNSManager.swift */,
+				7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */,
 			);
 			name = iOS;
 			path = "Ares-iOS";
@@ -539,7 +542,6 @@
 				721C79FC1C5D843E008EFF59 /* LoginViewController.xib in Resources */,
 				721C797D1C5D4294008EFF59 /* LaunchScreen.storyboard in Resources */,
 				721C79761C5D428E008EFF59 /* Assets.xcassets in Resources */,
-				721C797E1C5D4294008EFF59 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,7 +577,9 @@
 			files = (
 				721C79FB1C5D843E008EFF59 /* LoginViewController.swift in Sources */,
 				721C79781C5D428E008EFF59 /* ViewController.swift in Sources */,
+				7203D1C01C5DA0CD0011E3F0 /* NSDataExtensions.swift in Sources */,
 				721C79FE1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift in Sources */,
+				7203D1BE1C5D9F690011E3F0 /* APNSManager.swift in Sources */,
 				721C79751C5D428E008EFF59 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,14 +654,6 @@
 				721C797A1C5D4294008EFF59 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		721C797B1C5D4294008EFF59 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				721C797C1C5D4294008EFF59 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

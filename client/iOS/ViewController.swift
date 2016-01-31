@@ -10,14 +10,26 @@ import UIKit
 import AresKit
 
 class ViewController: UIViewController, LoginViewControllerDelegate {
-    private var credentialStorage: CredentialStorage!
-    private var client: Client!
+    private let credentialStorage: CredentialStorage
+    private let apnsManager: APNSManager
+    private let client: Client
+    
+    init(client: Client, credentialStorage: CredentialStorage, apnsManager: APNSManager) {
+        self.client = client
+        self.credentialStorage = credentialStorage
+        self.apnsManager = apnsManager
+        
+        super.init(nibName: nil, bundle: nil)
+        
+        title = "🚀 Ares"
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        credentialStorage = CredentialStorage.sharedInstance
-        client = Client(URL: NSURL(string: "http://localhost:5000")!)
-        
         if credentialStorage.activeToken == nil {
             dispatch_async(dispatch_get_main_queue()) {
                 self.presentLoginViewController()
