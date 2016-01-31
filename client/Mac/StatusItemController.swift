@@ -64,7 +64,15 @@ import AresKit
         let pasteboard = sender.draggingPasteboard()
         guard let types = pasteboard.types else { return false }
         if types.contains(NSFilenamesPboardType) {
-            if let files = pasteboard.propertyListForType(NSFilenamesPboardType) as? [String] {
+            if let files = pasteboard.propertyListForType(NSFilenamesPboardType) as? [String],
+                   device = devicesManager.devices.first?.registeredDevice {
+                for file in files {
+                    client.send(token, filePath: file, device: device) { result in
+                        if let error = result.error {
+                            print(error)
+                        }
+                    }
+                }
                 print(files)
                 return true
             }

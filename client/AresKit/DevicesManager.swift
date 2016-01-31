@@ -49,9 +49,12 @@ public final class DevicesManager {
         client.getDevices(token) { result in
             switch result {
             case let .Success(registeredDevices):
-                self.devices = registeredDevices.map {
-                    return Device(registeredDevice: $0, availability: .None)
-                }
+                self.devices = registeredDevices
+                    .filter {
+                        return $0.uuid != self.client.deviceUUID
+                    }.map {
+                        Device(registeredDevice: $0, availability: .None)
+                    }
             case let .Failure(error):
                 self.delegate?.devicesManager(self, didFailWithError: error)
             }

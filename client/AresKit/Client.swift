@@ -82,6 +82,16 @@ public final class Client {
         requestModelArray(request, completionHandler: completionHandler)
     }
     
+    public func send(accessToken: AccessToken, filePath: String, device: RegisteredDevice, completionHandler: Result<Void, NSError> -> Void) {
+        let request = Request(method: .POST, path: "/send", parameters: [
+            "token": accessToken.token,
+            "file_path": filePath,
+            "device_id": device.uuid
+        ])
+        print(request.parameters)
+        requestVoid(request, completionHandler: completionHandler)
+    }
+    
     public var deviceUUID: String {
         let ud = NSUserDefaults.standardUserDefaults()
         let UUID: String
@@ -179,6 +189,17 @@ public final class Client {
                     completionHandler(.Failure(error))
                 }
             }
+    }
+    
+    private func requestVoid(request: Request, completionHandler: Result<Void, NSError> -> Void) {
+        requestJSON(request) { result in
+            switch result {
+            case .Success:
+                completionHandler(.Success(()))
+            case let .Failure(error):
+                completionHandler(.Failure(error))
+            }
+        }
     }
     
     private static func constructAPIErrorFromJSON(json: JSONDictionary) -> NSError {
