@@ -71,8 +71,7 @@ class LoginViewController: UIViewController {
         guard let client = client else { return }
         client.registerDevice(token, pushToken: apnsManager.token) { result in
             switch result {
-            case let .Success(device):
-                print(device)
+            case .Success:
                 self.delegate?.loginViewController(self, authenticatedWithToken: token)
             case let .Failure(error):
                 self.showAlertForError(error)

@@ -30,7 +30,6 @@ public protocol OutgoingFileTransferDelegate: AnyObject {
         super.init()
         
         self.session.delegate = self
-        print(self.session.connectedPeers)
     }
     
     // MARK: MCSessionDelegate

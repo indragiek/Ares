@@ -84,7 +84,6 @@ public final class Client {
             "to_id": device.uuid,
             "from_id": deviceUUID
         ])
-        print(request.parameters)
         requestVoid(request, completionHandler: completionHandler)
     }
     
