@@ -75,6 +75,12 @@ import AresKit
         print(error)
     }
     
+    func connectionManager(manager: ConnectionManager, willBeginIncomingFileTransfer transfer: IncomingFileTransfer) {}
+    
+    func connectionManager(manager: ConnectionManager, willBeginOutgoingFileTransfer transfer: OutgoingFileTransfer) {
+        print("Sending \(transfer.context.filePath)")
+    }
+    
     // MARK: Drag and Drop
     
     func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {

@@ -12,6 +12,8 @@ import MultipeerConnectivity
 public protocol ConnectionManagerDelegate: AnyObject {
     func connectionManager(manager: ConnectionManager, didUpdateDevices devices: [Device])
     func connectionManager(manager: ConnectionManager, didFailWithError error: NSError)
+    func connectionManager(manager: ConnectionManager, willBeginIncomingFileTransfer transfer: IncomingFileTransfer)
+    func connectionManager(manager: ConnectionManager, willBeginOutgoingFileTransfer transfer: OutgoingFileTransfer)
 }
 
 public struct Device: CustomStringConvertible {
@@ -43,7 +45,6 @@ private let DiscoveryUUIDKey = "uuid";
     private let client: Client
     private let token: AccessToken
     private let localPeer: MCPeerID
-    private let session: MCSession
     private let advertiser: MCNearbyServiceAdvertiser
     private let browser: MCNearbyServiceBrowser
     private var peerIDToUUIDMap = [MCPeerID: String]()
@@ -57,13 +58,14 @@ private let DiscoveryUUIDKey = "uuid";
     }
     
     public weak var delegate: ConnectionManagerDelegate?
+    private weak var incomingFileTransferDelegate: IncomingFileTransferDelegate?
+    private weak var outgoingFileTransferDelegate: OutgoingFileTransferDelegate?
     
     public init(client: Client, token: AccessToken) {
         self.client = client
         self.token = token
         
         localPeer = MCPeerID(displayName: getDeviceName())
-        session = MCSession(peer: localPeer)
         let discoveryInfo = [DiscoveryUUIDKey: client.deviceUUID]
         advertiser = MCNearbyServiceAdvertiser(peer: localPeer, discoveryInfo: discoveryInfo, serviceType: ServiceType)
         browser = MCNearbyServiceBrowser(peer: localPeer, serviceType: ServiceType)
@@ -114,7 +116,12 @@ private let DiscoveryUUIDKey = "uuid";
     // MARK: Transfers
     
     func requestTransferFromPeer(peerID: MCPeerID, filePath: String) {
-        print("Requesting transfer from \(peerID) for \(filePath)")
+        let transfer = IncomingFileTransfer(localPeerID: localPeer, remotePeerID: peerID)
+        transfer.delegate = incomingFileTransferDelegate
+        delegate?.connectionManager(self, willBeginIncomingFileTransfer: transfer)
+        
+        let context = FileTransferContext(filePath: filePath)
+        browser.invitePeer(peerID, toSession: transfer.session, withContext: context.archive(), timeout: 0)
     }
     
     // MARK: MCNearbyServiceAdvertiserDelegate
@@ -124,6 +131,13 @@ private let DiscoveryUUIDKey = "uuid";
     }
     
     public func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
+        guard let context = context.flatMap(FileTransferContext.init) else { return }
+        
+        let transfer = OutgoingFileTransfer(context: context, localPeerID: localPeer, remotePeerID: peerID)
+        transfer.delegate = outgoingFileTransferDelegate
+        delegate?.connectionManager(self, willBeginOutgoingFileTransfer: transfer)
+        
+        invitationHandler(true, transfer.session)
     }
     
     // MARK: MCNearbyServiceBrowserDelegate
