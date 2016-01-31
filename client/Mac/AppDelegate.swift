@@ -16,13 +16,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, LoginWindowControllerDelegat
     private var credentialStorage: CredentialStorage!
     private var client: Client!
     private var loginWindowController: LoginWindowController!
-    private var statusBarItem: NSStatusItem!
+    private var statusItemController: StatusItemController!
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         credentialStorage = CredentialStorage.sharedInstance
         client = Client(URL: NSURL(string: "https://ares-server.herokuapp.com")!)
-        if credentialStorage.activeToken != nil {
-            setupStatusBarItem()
+        
+        if let token = credentialStorage.activeToken {
+            completeSetupWithToken(token)
         } else {
             showLoginWindowController()
         }
@@ -40,9 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, LoginWindowControllerDelegat
         loginWindowController = nil
     }
     
-    func setupStatusBarItem() {
-        statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
-        statusBarItem.button?.title = "🚀"
+    func completeSetupWithToken(token: AccessToken) {
+        statusItemController = StatusItemController(client: client, token: token)
     }
 
     // MARK: LoginWindowControllerDelegate
@@ -50,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, LoginWindowControllerDelegat
     func loginWindowController(controller: LoginWindowController, authenticatedWithToken token: AccessToken) {
         credentialStorage.activeToken = token
         tearDownLoginWindowController()
-        setupStatusBarItem()
+        completeSetupWithToken(token)
     }
     
     func loginWindowController(controller: LoginWindowController, failedToAuthenticateWithError error: NSError) {

@@ -82,7 +82,7 @@ public final class Client {
         requestModelArray(request, completionHandler: completionHandler)
     }
     
-    var deviceUUID: String {
+    public var deviceUUID: String {
         let ud = NSUserDefaults.standardUserDefaults()
         let UUID: String
         if let storedUUID = ud.stringForKey(UserDefaultsDeviceUUIDKey) {
