@@ -12,6 +12,12 @@ import KVOController
 import QuickLook
 
 class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionManagerDelegate, IncomingFileTransferDelegate, QLPreviewControllerDelegate {
+    private enum State {
+        case Default
+        case WaitingForDiscovery
+        case Transferring
+    }
+    
     private let credentialStorage: CredentialStorage
     private let apnsManager: APNSManager
     private let client: Client
@@ -21,9 +27,33 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
     private var queuedPushNotifications = [PushNotification]()
     private var temporaryFileURL: NSURL?
     
+    private var state = State.Default {
+        didSet {
+            switch state {
+            case .Default:
+                placeholderImageView.hidden = false
+                determinateProgressStackView.hidden = true
+                indeterminateProgressStackView.hidden = true
+                activityIndicator.stopAnimating()
+            case .WaitingForDiscovery:
+                placeholderImageView.hidden = true
+                determinateProgressStackView.hidden = true
+                indeterminateProgressStackView.hidden = false
+                activityIndicator.startAnimating()
+            case .Transferring:
+                placeholderImageView.hidden = true
+                determinateProgressStackView.hidden = false
+                indeterminateProgressStackView.hidden = true
+                activityIndicator.stopAnimating()
+            }
+        }
+    }
+    
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var progressStackView: UIStackView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var determinateProgressStackView: UIStackView!
+    @IBOutlet weak var indeterminateProgressStackView: UIStackView!
     @IBOutlet weak var placeholderImageView: UIImageView!
     
     init(client: Client, credentialStorage: CredentialStorage, apnsManager: APNSManager) {
@@ -50,13 +80,6 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
                 self.presentLoginViewController()
             }
         }
-    }
-    
-    // MARK: UI
-    
-    func setPlaceholderHidden(hidden: Bool) {
-        placeholderImageView.hidden = hidden
-        progressStackView.hidden = !hidden
     }
     
     // MARK: Login
@@ -86,6 +109,7 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
     // MARK: Notification Handling
     
     func handlePushNotification(notification: PushNotification) {
+        state = .WaitingForDiscovery
         if let connectionManager = connectionManager {
             connectionManager.queueNotification(notification)
         } else {
@@ -123,7 +147,7 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
         
         dispatch_async(dispatch_get_main_queue()) {
             self.progressLabel.text = "Receiving \(fileName)..."
-            self.setPlaceholderHidden(true)
+            self.state = .Transferring
         }
         
         _KVOController.observe(progress, keyPath: "fractionCompleted", options: []) { (_, _, _) in
@@ -164,7 +188,7 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
             let previewController = PreviewViewController(fileName: name, URL: fixedURL)
             previewController.delegate = self
             self.presentViewController(previewController, animated: true) {
-                self.setPlaceholderHidden(false)
+                self.state = .Default
             }
         }
     }
