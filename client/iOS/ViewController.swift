@@ -8,14 +8,19 @@
 
 import UIKit
 import AresKit
+import KVOController
 
 class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionManagerDelegate, IncomingFileTransferDelegate {
     private let credentialStorage: CredentialStorage
     private let apnsManager: APNSManager
     private let client: Client
+    private var _KVOController: FBKVOController!
     
     private var connectionManager: ConnectionManager?
     private var queuedPushNotifications = [PushNotification]()
+    
+    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var progressLabel: UILabel!
     
     init(client: Client, credentialStorage: CredentialStorage, apnsManager: APNSManager) {
         self.client = client
@@ -24,6 +29,7 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
         
         super.init(nibName: nil, bundle: nil)
         
+        self._KVOController = FBKVOController(observer: self)
         title = "🚀 Ares"
     }
     
@@ -102,7 +108,17 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
     // MARK: IncomingFileTransferDelegate
     
     func incomingFileTransfer(transfer: IncomingFileTransfer, didStartReceivingFileWithName name: String, progress: NSProgress) {
-        print("Started receiving \(name)")
+        let fileName = (transfer.context.filePath as NSString).lastPathComponent
+        
+        _KVOController.observe(progress, keyPath: "fractionCompleted", options: []) { (_, _, _) in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.progressView.progress = Float(progress.fractionCompleted)
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.progressLabel.text = "Receiving \(fileName)..."
+        }
     }
     
     func incomingFileTransfer(transfer: IncomingFileTransfer, didFailToReceiveFileWithName name: String, error: NSError) {
