@@ -51,6 +51,7 @@ private let DiscoveryUUIDKey = "uuid";
     private var UUIDToPeerIDMap = [String: MCPeerID]()
     private var UUIDToNotificationMap = [String: [PushNotification]]()
     private var activeTransfers = [AnyObject]()
+    private var isMonitoring: Bool = false
     
     private(set) public var devices = [Device]() {
         didSet {
@@ -75,6 +76,18 @@ private let DiscoveryUUIDKey = "uuid";
         
         advertiser.delegate = self
         browser.delegate = self
+        
+        #if os(iOS)
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: "appWillResignActive:", name: UIApplicationWillResignActiveNotification, object: nil)
+        nc.addObserver(self, selector: "appDidBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        #endif
+    }
+    
+    deinit {
+        #if os(iOS)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        #endif
     }
     
     public func getDeviceList(completionHandler: Void -> Void) {
@@ -97,11 +110,13 @@ private let DiscoveryUUIDKey = "uuid";
     public func startMonitoring() {
         advertiser.startAdvertisingPeer()
         browser.startBrowsingForPeers()
+        isMonitoring = true
     }
     
     public func stopMonitoring() {
         advertiser.stopAdvertisingPeer()
         browser.stopBrowsingForPeers()
+        isMonitoring = false
     }
     
     public func queueNotification(notification: PushNotification) {
@@ -114,6 +129,23 @@ private let DiscoveryUUIDKey = "uuid";
         }
     }
     
+    // MARK: Notifications
+    
+    #if os(iOS)
+    @objc private func appWillResignActive(notification: NSNotification) {
+        advertiser.stopAdvertisingPeer()
+        browser.stopBrowsingForPeers()
+        peerIDToUUIDMap.removeAll()
+        UUIDToPeerIDMap.removeAll()
+    }
+    
+    @objc private func appDidBecomeActive(notification: NSNotification) {
+        guard isMonitoring else { return }
+        advertiser.startAdvertisingPeer()
+        browser.startBrowsingForPeers()
+    }
+    #endif
+    
     // MARK: Transfers
     
     func requestTransferFromPeer(peerID: MCPeerID, filePath: String) {
@@ -124,7 +156,7 @@ private let DiscoveryUUIDKey = "uuid";
         
         delegate?.connectionManager(self, willBeginIncomingFileTransfer: transfer)
                 
-        browser.invitePeer(peerID, toSession: transfer.session, withContext: context.archive(), timeout: 0)
+        browser.invitePeer(peerID, toSession: transfer.session, withContext: context.archive(), timeout: 30)
     }
     
     // MARK: MCNearbyServiceAdvertiserDelegate
