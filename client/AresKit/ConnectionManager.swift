@@ -41,7 +41,7 @@ public struct Device: CustomStringConvertible {
 private let ServiceType = "ares-ft";
 private let DiscoveryUUIDKey = "uuid";
 
-@objc public final class ConnectionManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate {
+@objc public final class ConnectionManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, IncomingFileTransferDelegate, OutgoingFileTransferDelegate {
     private let client: Client
     private let token: AccessToken
     private let localPeer: MCPeerID
@@ -50,6 +50,7 @@ private let DiscoveryUUIDKey = "uuid";
     private var peerIDToUUIDMap = [MCPeerID: String]()
     private var UUIDToPeerIDMap = [String: MCPeerID]()
     private var UUIDToNotificationMap = [String: [PushNotification]]()
+    private var activeTransfers = [AnyObject]()
     
     private(set) public var devices = [Device]() {
         didSet {
@@ -58,8 +59,8 @@ private let DiscoveryUUIDKey = "uuid";
     }
     
     public weak var delegate: ConnectionManagerDelegate?
-    private weak var incomingFileTransferDelegate: IncomingFileTransferDelegate?
-    private weak var outgoingFileTransferDelegate: OutgoingFileTransferDelegate?
+    public weak var incomingFileTransferDelegate: IncomingFileTransferDelegate?
+    public weak var outgoingFileTransferDelegate: OutgoingFileTransferDelegate?
     
     public init(client: Client, token: AccessToken) {
         self.client = client
@@ -116,11 +117,13 @@ private let DiscoveryUUIDKey = "uuid";
     // MARK: Transfers
     
     func requestTransferFromPeer(peerID: MCPeerID, filePath: String) {
-        let transfer = IncomingFileTransfer(localPeerID: localPeer, remotePeerID: peerID)
-        transfer.delegate = incomingFileTransferDelegate
-        delegate?.connectionManager(self, willBeginIncomingFileTransfer: transfer)
-        
         let context = FileTransferContext(filePath: filePath)
+        let transfer = IncomingFileTransfer(context: context, localPeerID: localPeer, remotePeerID: peerID)
+        transfer.delegate = self
+        activeTransfers.append(transfer)
+        
+        delegate?.connectionManager(self, willBeginIncomingFileTransfer: transfer)
+                
         browser.invitePeer(peerID, toSession: transfer.session, withContext: context.archive(), timeout: 0)
     }
     
@@ -134,7 +137,8 @@ private let DiscoveryUUIDKey = "uuid";
         guard let context = context.flatMap(FileTransferContext.init) else { return }
         
         let transfer = OutgoingFileTransfer(context: context, localPeerID: localPeer, remotePeerID: peerID)
-        transfer.delegate = outgoingFileTransferDelegate
+        transfer.delegate = self
+        activeTransfers.append(transfer)
         delegate?.connectionManager(self, willBeginOutgoingFileTransfer: transfer)
         
         invitationHandler(true, transfer.session)
@@ -181,5 +185,43 @@ private let DiscoveryUUIDKey = "uuid";
             }
         }
         return nil
+    }
+    
+    private func removeActiveTransfer(transfer: AnyObject) {
+        if let index = activeTransfers.indexOf({ $0 === transfer }) {
+            activeTransfers.removeAtIndex(index)
+        }
+    }
+    
+    // MARK: IncomingFileTransferDelegate
+    
+    public func incomingFileTransfer(transfer: IncomingFileTransfer, didReceiveFileWithName name: String, URL: NSURL) {
+        removeActiveTransfer(transfer)
+        incomingFileTransferDelegate?.incomingFileTransfer(transfer, didReceiveFileWithName: name, URL: URL)
+    }
+    
+    public func incomingFileTransfer(transfer: IncomingFileTransfer, didFailToReceiveFileWithName name: String, error: NSError) {
+        removeActiveTransfer(transfer)
+        incomingFileTransferDelegate?.incomingFileTransfer(transfer, didFailToReceiveFileWithName: name, error: error)
+    }
+    
+    public func incomingFileTransfer(transfer: IncomingFileTransfer, didStartReceivingFileWithName name: String, progress: NSProgress) {
+        incomingFileTransferDelegate?.incomingFileTransfer(transfer, didStartReceivingFileWithName: name, progress: progress)
+    }
+    
+    // MARK: OutgoingFileTransferDelegate
+    
+    public func outgoingFileTransferDidComplete(transfer: OutgoingFileTransfer) {
+        removeActiveTransfer(transfer)
+        outgoingFileTransferDelegate?.outgoingFileTransferDidComplete(transfer)
+    }
+    
+    public func outgoingFileTransfer(transfer: OutgoingFileTransfer, didFailWithError error: NSError) {
+        removeActiveTransfer(transfer)
+        outgoingFileTransferDelegate?.outgoingFileTransfer(transfer, didFailWithError: error)
+    }
+    
+    public func outgoingFileTransfer(transfer: OutgoingFileTransfer, didStartWithProgress progress: NSProgress) {
+        outgoingFileTransferDelegate?.outgoingFileTransfer(transfer, didStartWithProgress: progress)
     }
 }
