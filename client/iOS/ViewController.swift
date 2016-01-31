@@ -9,8 +9,9 @@
 import UIKit
 import AresKit
 import KVOController
+import QuickLook
 
-class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionManagerDelegate, IncomingFileTransferDelegate {
+class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionManagerDelegate, IncomingFileTransferDelegate, QLPreviewControllerDelegate {
     private let credentialStorage: CredentialStorage
     private let apnsManager: APNSManager
     private let client: Client
@@ -139,6 +140,7 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
     private func showPreviewControllerForFileName(name: String, URL: NSURL) {
         guard let directoryURL = URL.URLByDeletingLastPathComponent else { return }
         let fixedURL = directoryURL.URLByAppendingPathComponent(name)
+        temporaryFileURL = fixedURL
         
         let fm = NSFileManager.defaultManager()
         do { try fm.removeItemAtURL(fixedURL) } catch _ {}
@@ -150,7 +152,17 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
         
         dispatch_async(dispatch_get_main_queue()) {
             let previewController = PreviewViewController(fileName: name, URL: fixedURL)
+            previewController.delegate = self
             self.presentViewController(previewController, animated: true, completion: nil)
         }
+    }
+    
+    // MARK: QLPreviewControllerDelegate
+    
+    func previewControllerDidDismiss(controller: QLPreviewController) {
+        guard let fileURL = temporaryFileURL else { return }
+        do {
+            try NSFileManager.defaultManager().removeItemAtURL(fileURL)
+        } catch _ {}
     }
 }
