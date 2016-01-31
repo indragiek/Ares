@@ -163,14 +163,14 @@ var apnConnection = new apn.Connection({ production: false });
 app.post('/send', function(req, res, next) {
     async.waterfall([
         connectMongoDB,
-        async.apply(getDevice, req.user._id, req.body.device_id),
+        async.apply(getDevice, req.user._id, req.body.to_id),
         function(device, callback) {
             if (device) {
                 var apnsDevice = new apn.Device(device.push_token);
                 var notification = new apn.Notification();
                 var filePath = req.body.file_path;
                 notification.alert = path.basename(filePath);
-                notification.payload = { 'device_id': device._id, 'path': filePath };
+                notification.payload = { 'device_id': req.body.from_id, 'path': filePath };
                 apnConnection.pushNotification(notification, apnsDevice);
                 callback(null, {});
             } else {
