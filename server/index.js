@@ -14,6 +14,7 @@ TOKEN_EXPIRY_SECONDS = 86400; // 24 hours
 ERROR_USER_EXISTS = new Error('USER_EXISTS');
 ERROR_USER_DOES_NOT_EXIST = new Error('USER_DOES_NOT_EXIST');
 ERROR_PASSWORD_INCORRECT = new Error('PASSWORD_INCORRECT');
+ERROR_INVALID_TOKEN = new Error('INVALID_TOKEN');
 
 // ######## EXPRESS #########
 
@@ -92,6 +93,25 @@ app.post('/authenticate', function(req, res, next) {
             });
         }
     });
+});
+
+app.use(function(req, res, next) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        jwt.verify(token, app.get('secret'), function(err, user) {
+            if (err) {
+                next(ERROR_INVALID_TOKEN);
+            } else {
+                req.user = user;
+                next();
+            }
+        });
+    } else {
+        res.status(403).json({
+            success: false,
+            error: 'No authentication token provided'
+        });
+    }
 });
 
 app.use(function(err, req, res, next) {
