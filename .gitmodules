@@ -4,3 +4,6 @@
 [submodule "client/External/KeychainAccess"]
 	path = client/External/KeychainAccess
 	url = git@github.com:kishikawakatsumi/KeychainAccess.git
+[submodule "client/External/KVOController"]
+	path = client/External/KVOController
+	url = git@github.com:facebook/KVOController.git

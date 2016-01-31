@@ -62,6 +62,9 @@
 		7252DD751C5DFC5D00E681E1 /* FileTransferContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252DD731C5DFC5D00E681E1 /* FileTransferContext.swift */; };
 		7252DD771C5DFD4400E681E1 /* OutgoingFileTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252DD761C5DFD4400E681E1 /* OutgoingFileTransfer.swift */; };
 		7252DD781C5DFD4400E681E1 /* OutgoingFileTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252DD761C5DFD4400E681E1 /* OutgoingFileTransfer.swift */; };
+		7252DD7A1C5E0F5A00E681E1 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7252DD791C5E0F5A00E681E1 /* ViewController.xib */; };
+		7252DD841C5E127A00E681E1 /* KVOController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7252DD811C5E126D00E681E1 /* KVOController.framework */; };
+		7252DD851C5E127A00E681E1 /* KVOController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7252DD811C5E126D00E681E1 /* KVOController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +145,27 @@
 			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
 			remoteInfo = "Alamofire iOS";
 		};
+		7252DD801C5E126D00E681E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7252DD7B1C5E126D00E681E1 /* DynamicFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D719F2981B73962E0090C2FB;
+			remoteInfo = "KVOController-iOS";
+		};
+		7252DD821C5E126D00E681E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7252DD7B1C5E126D00E681E1 /* DynamicFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D719F2BD1B7396AF0090C2FB;
+			remoteInfo = "KVOController-OSX";
+		};
+		7252DD861C5E127A00E681E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7252DD7B1C5E126D00E681E1 /* DynamicFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D719F2971B73962E0090C2FB;
+			remoteInfo = "KVOController-iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -163,6 +187,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				7252DD851C5E127A00E681E1 /* KVOController.framework in Embed Frameworks */,
 				721C799E1C5D4301008EFF59 /* AresKit.framework in Embed Frameworks */,
 				721C79C81C5D63C6008EFF59 /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -211,6 +236,8 @@
 		7252DD701C5DFA8B00E681E1 /* IncomingFileTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingFileTransfer.swift; sourceTree = "<group>"; };
 		7252DD731C5DFC5D00E681E1 /* FileTransferContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTransferContext.swift; sourceTree = "<group>"; };
 		7252DD761C5DFD4400E681E1 /* OutgoingFileTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingFileTransfer.swift; sourceTree = "<group>"; };
+		7252DD791C5E0F5A00E681E1 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController.xib; path = iOS/ViewController.xib; sourceTree = SOURCE_ROOT; };
+		7252DD7B1C5E126D00E681E1 /* DynamicFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DynamicFramework.xcodeproj; path = External/KVOController/DynamicFramework.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7252DD841C5E127A00E681E1 /* KVOController.framework in Frameworks */,
 				721C799D1C5D4301008EFF59 /* AresKit.framework in Frameworks */,
 				721C79C71C5D63C6008EFF59 /* Alamofire.framework in Frameworks */,
 			);
@@ -302,6 +330,7 @@
 				721C79FD1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift */,
 				7203D1BD1C5D9F690011E3F0 /* APNSManager.swift */,
 				7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */,
+				7252DD791C5E0F5A00E681E1 /* ViewController.xib */,
 			);
 			name = iOS;
 			path = "Ares-iOS";
@@ -333,6 +362,7 @@
 		721C79A81C5D6397008EFF59 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				7252DD7B1C5E126D00E681E1 /* DynamicFramework.xcodeproj */,
 				721C79A91C5D63A1008EFF59 /* Alamofire.xcodeproj */,
 			);
 			name = External;
@@ -348,6 +378,15 @@
 				721C79BC1C5D63A1008EFF59 /* Alamofire.framework */,
 				721C79BE1C5D63A1008EFF59 /* Alamofire tvOS Tests.xctest */,
 				721C79C01C5D63A1008EFF59 /* Alamofire.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7252DD7C1C5E126D00E681E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7252DD811C5E126D00E681E1 /* KVOController.framework */,
+				7252DD831C5E126D00E681E1 /* KVOController.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,6 +447,7 @@
 			dependencies = (
 				721C799C1C5D4301008EFF59 /* PBXTargetDependency */,
 				721C79CA1C5D63C6008EFF59 /* PBXTargetDependency */,
+				7252DD871C5E127A00E681E1 /* PBXTargetDependency */,
 			);
 			name = "Ares-iOS";
 			productName = "Ares-iOS";
@@ -497,6 +537,10 @@
 					ProductGroup = 721C79AA1C5D63A1008EFF59 /* Products */;
 					ProjectRef = 721C79A91C5D63A1008EFF59 /* Alamofire.xcodeproj */;
 				},
+				{
+					ProductGroup = 7252DD7C1C5E126D00E681E1 /* Products */;
+					ProjectRef = 7252DD7B1C5E126D00E681E1 /* DynamicFramework.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -558,6 +602,20 @@
 			remoteRef = 721C79BF1C5D63A1008EFF59 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		7252DD811C5E126D00E681E1 /* KVOController.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KVOController.framework;
+			remoteRef = 7252DD801C5E126D00E681E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7252DD831C5E126D00E681E1 /* KVOController.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KVOController.framework;
+			remoteRef = 7252DD821C5E126D00E681E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -577,6 +635,7 @@
 			files = (
 				721C79FC1C5D843E008EFF59 /* LoginViewController.xib in Resources */,
 				721C797D1C5D4294008EFF59 /* LaunchScreen.storyboard in Resources */,
+				7252DD7A1C5E0F5A00E681E1 /* ViewController.xib in Resources */,
 				721C79761C5D428E008EFF59 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -685,6 +744,11 @@
 			isa = PBXTargetDependency;
 			name = "Alamofire iOS";
 			targetProxy = 721C79C91C5D63C6008EFF59 /* PBXContainerItemProxy */;
+		};
+		7252DD871C5E127A00E681E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "KVOController-iOS";
+			targetProxy = 7252DD861C5E127A00E681E1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
