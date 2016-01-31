@@ -23,6 +23,8 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var progressStackView: UIStackView!
+    @IBOutlet weak var placeholderImageView: UIImageView!
     
     init(client: Client, credentialStorage: CredentialStorage, apnsManager: APNSManager) {
         self.client = client
@@ -48,6 +50,13 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
                 self.presentLoginViewController()
             }
         }
+    }
+    
+    // MARK: UI
+    
+    func setPlaceholderHidden(hidden: Bool) {
+        placeholderImageView.hidden = hidden
+        progressStackView.hidden = !hidden
     }
     
     // MARK: Login
@@ -112,14 +121,15 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
     func incomingFileTransfer(transfer: IncomingFileTransfer, didStartReceivingFileWithName name: String, progress: NSProgress) {
         let fileName = (transfer.context.filePath as NSString).lastPathComponent
         
+        dispatch_async(dispatch_get_main_queue()) {
+            self.progressLabel.text = "Receiving \(fileName)..."
+            self.setPlaceholderHidden(true)
+        }
+        
         _KVOController.observe(progress, keyPath: "fractionCompleted", options: []) { (_, _, _) in
             dispatch_async(dispatch_get_main_queue()) {
                 self.progressView.progress = Float(progress.fractionCompleted)
             }
-        }
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.progressLabel.text = "Receiving \(fileName)..."
         }
     }
     
@@ -153,7 +163,9 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
         dispatch_async(dispatch_get_main_queue()) {
             let previewController = PreviewViewController(fileName: name, URL: fixedURL)
             previewController.delegate = self
-            self.presentViewController(previewController, animated: true, completion: nil)
+            self.presentViewController(previewController, animated: true) {
+                self.setPlaceholderHidden(false)
+            }
         }
     }
     

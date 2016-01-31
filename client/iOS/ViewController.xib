@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="Ares" customModuleProvider="target">
             <connections>
+                <outlet property="placeholderImageView" destination="fZQ-Qi-qwp" id="xux-nB-7NF"/>
                 <outlet property="progressLabel" destination="goG-Ov-0c2" id="h0G-bY-gfW"/>
+                <outlet property="progressStackView" destination="Yhp-K7-xtB" id="9wp-g8-8lm"/>
                 <outlet property="progressView" destination="bhM-RB-Vvi" id="999-8O-XJP"/>
                 <outlet property="view" destination="iN0-l3-epB" id="BoZ-1s-b3y"/>
             </connections>
@@ -17,25 +19,35 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bhM-RB-Vvi">
-                    <rect key="frame" x="30" y="150" width="540" height="2"/>
-                </progressView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiving..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goG-Ov-0c2">
-                    <rect key="frame" x="30" y="160" width="540" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Yhp-K7-xtB">
+                    <rect key="frame" x="30" y="194" width="540" height="33"/>
+                    <subviews>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bhM-RB-Vvi">
+                            <rect key="frame" x="0.0" y="0.0" width="540" height="2"/>
+                        </progressView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Receiving..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goG-Ov-0c2">
+                            <rect key="frame" x="0.0" y="12" width="540" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="fZQ-Qi-qwp">
+                    <rect key="frame" x="180" y="248" width="240" height="104"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="goG-Ov-0c2" firstAttribute="top" secondItem="bhM-RB-Vvi" secondAttribute="bottom" constant="8" id="2TC-om-THW"/>
-                <constraint firstItem="bhM-RB-Vvi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="8xL-bB-Ezw"/>
-                <constraint firstAttribute="trailing" secondItem="bhM-RB-Vvi" secondAttribute="trailing" constant="30" id="M3M-rN-R1A"/>
-                <constraint firstItem="goG-Ov-0c2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="b6C-Lx-JVa"/>
-                <constraint firstItem="bhM-RB-Vvi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="jKh-AD-Ckj"/>
-                <constraint firstAttribute="trailing" secondItem="goG-Ov-0c2" secondAttribute="trailing" constant="30" id="o52-UH-Wuq"/>
+                <constraint firstItem="Yhp-K7-xtB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Bau-KP-WsA"/>
+                <constraint firstItem="Yhp-K7-xtB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="FdB-Id-WFk"/>
+                <constraint firstAttribute="trailing" secondItem="Yhp-K7-xtB" secondAttribute="trailing" constant="30" id="QbE-VY-Rkj"/>
+                <constraint firstItem="fZQ-Qi-qwp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bfM-94-xPH"/>
+                <constraint firstItem="fZQ-Qi-qwp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hLS-ZX-603"/>
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="placeholder" width="240" height="104"/>
+    </resources>
 </document>
