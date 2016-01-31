@@ -10,17 +10,22 @@ import Foundation
 
 public protocol DevicesManagerDelegate: AnyObject {
     func devicesManager(manager: DevicesManager, didUpdateDevices devices: [Device])
+    func devicesManager(manager: DevicesManager, didFailWithError error: NSError)
 }
 
-public struct Device {
+public struct Device: CustomStringConvertible {
     public enum Availability {
         case None
         case Local
         case Remote
     }
     
-    let registeredDevice: RegisteredDevice
-    let availability: Availability
+    public var description: String {
+        return "Device{registeredDevice=\(registeredDevice), availability=\(availability)}"
+    }
+    
+    public let registeredDevice: RegisteredDevice
+    public let availability: Availability
 }
 
 public final class DevicesManager {
@@ -33,12 +38,23 @@ public final class DevicesManager {
         }
     }
     
-    weak var delegate: DevicesManagerDelegate?
+    public weak var delegate: DevicesManagerDelegate?
     
     public init(client: Client, token: AccessToken) {
         self.client = client
         self.token = token
     }
     
-    
+    public func getDeviceList() {
+        client.getDevices(token) { result in
+            switch result {
+            case let .Success(registeredDevices):
+                self.devices = registeredDevices.map {
+                    return Device(registeredDevice: $0, availability: .None)
+                }
+            case let .Failure(error):
+                self.delegate?.devicesManager(self, didFailWithError: error)
+            }
+        }
+    }
 }

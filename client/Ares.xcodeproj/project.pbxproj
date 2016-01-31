@@ -11,6 +11,7 @@
 		7203D1C01C5DA0CD0011E3F0 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */; };
 		7203D1C31C5DAD580011E3F0 /* DevicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C21C5DAD580011E3F0 /* DevicesManager.swift */; };
 		7203D1C41C5DAD580011E3F0 /* DevicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C21C5DAD580011E3F0 /* DevicesManager.swift */; };
+		7203D1C61C5DBA450011E3F0 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C51C5DBA450011E3F0 /* StatusItemController.swift */; };
 		721C793F1C5D41D1008EFF59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C793C1C5D41D1008EFF59 /* AppDelegate.swift */; };
 		721C79401C5D41D1008EFF59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 721C793D1C5D41D1008EFF59 /* Assets.xcassets */; };
 		721C79441C5D41DD008EFF59 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721C79421C5D41DD008EFF59 /* MainMenu.xib */; };
@@ -165,6 +166,7 @@
 		7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDataExtensions.swift; path = iOS/NSDataExtensions.swift; sourceTree = SOURCE_ROOT; };
 		7203D1C11C5DA8F10011E3F0 /* Ares.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Ares.entitlements; sourceTree = "<group>"; };
 		7203D1C21C5DAD580011E3F0 /* DevicesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesManager.swift; sourceTree = "<group>"; };
+		7203D1C51C5DBA450011E3F0 /* StatusItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusItemController.swift; path = Mac/StatusItemController.swift; sourceTree = SOURCE_ROOT; };
 		721C792C1C5D418C008EFF59 /* Ares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ares.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		721C793C1C5D41D1008EFF59 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Mac/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		721C793D1C5D41D1008EFF59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Mac/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -266,6 +268,7 @@
 				721C79421C5D41DD008EFF59 /* MainMenu.xib */,
 				721C79F51C5D8404008EFF59 /* LoginWindowController.swift */,
 				721C79F61C5D8404008EFF59 /* LoginWindowController.xib */,
+				7203D1C51C5DBA450011E3F0 /* StatusItemController.swift */,
 			);
 			name = Mac;
 			path = Ares;
@@ -581,6 +584,7 @@
 			files = (
 				721C793F1C5D41D1008EFF59 /* AppDelegate.swift in Sources */,
 				721C79F71C5D8404008EFF59 /* LoginWindowController.swift in Sources */,
+				7203D1C61C5DBA450011E3F0 /* StatusItemController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
