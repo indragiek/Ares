@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, LoginWindowControllerDelegat
     private var credentialStorage: CredentialStorage!
     private var client: Client!
     private var loginWindowController: LoginWindowController!
+    private var statusBarItem: NSStatusItem!
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         credentialStorage = CredentialStorage.sharedInstance
@@ -40,9 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, LoginWindowControllerDelegat
     }
     
     func setupStatusBarItem() {
-        guard let accessToken = credentialStorage.activeToken else {
-            fatalError("Cannot set up status bar item without access token")
-        }
+        statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
+        statusBarItem.button?.title = "🚀"
     }
 
     // MARK: LoginWindowControllerDelegate
