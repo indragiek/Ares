@@ -7,6 +7,7 @@ var async = require('async');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var apn = require('apn');
+var path = require('path');
 
 // ######## CONSTANTS #########
 
@@ -167,8 +168,9 @@ app.post('/send', function(req, res, next) {
             if (device) {
                 var apnsDevice = new apn.Device(device.push_token);
                 var notification = new apn.Notification();
-                notification.expiry = Math.floor(Date.now() / 1000) + 3600;
-                notification.alert = req.body.file_name;
+                var filePath = req.body.file_path;
+                notification.alert = path.basename(filePath);
+                notification.payload = { 'path': filePath };
                 apnConnection.pushNotification(notification, apnsDevice);
                 callback(null, {});
             } else {
