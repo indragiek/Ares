@@ -14,17 +14,22 @@ protocol LoginViewControllerDelegate: AnyObject {
 }
 
 class LoginViewController: UIViewController {
+    private let apnsManager: APNSManager
+    
     var client: Client?
     weak var delegate: LoginViewControllerDelegate?
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
-        title = NSLocalizedString("Login", comment: "")
+    init(apnsManager: APNSManager) {
+        self.apnsManager = apnsManager
+        
+        super.init(nibName: nil, bundle: nil)
+        
+        title = "Login"
     }
-
+    
     private func constructUser() -> User {
         return User(username: usernameField.text ?? "", password: passwordField.text ?? "")
     }
@@ -51,6 +56,19 @@ class LoginViewController: UIViewController {
         client.authenticate(user) { result in
             switch result {
             case let .Success(token):
+                self.registerDevice(token)
+            case let .Failure(error):
+                self.showAlertForError(error)
+            }
+        }
+    }
+    
+    private func registerDevice(token: AccessToken) {
+        guard let client = client else { return }
+        client.registerDevice(token, pushToken: apnsManager.token) { result in
+            switch result {
+            case let .Success(device):
+                print(device)
                 self.delegate?.loginViewController(self, authenticatedWithToken: token)
             case let .Failure(error):
                 self.showAlertForError(error)

@@ -40,7 +40,7 @@ class ViewController: UIViewController, LoginViewControllerDelegate {
     // MARK: Login
     
     private func presentLoginViewController() {
-        let loginViewController = LoginViewController()
+        let loginViewController = LoginViewController(apnsManager: apnsManager)
         loginViewController.client = client
         loginViewController.delegate = self
         

@@ -9,5 +9,6 @@
 import Foundation
 
 class APNSManager {
+    var token: String?
     init() {}
 }
