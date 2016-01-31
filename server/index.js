@@ -6,6 +6,7 @@ var assert = require('assert');
 var async = require('async');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+var apn = require('apn');
 
 // ######## CONSTANTS #########
 
@@ -14,6 +15,7 @@ DEVICES_COLLECTION = 'devices';
 TOKEN_EXPIRY_SECONDS = 86400; // 24 hours
 ERROR_USER_EXISTS = new Error('USER_EXISTS');
 ERROR_USER_DOES_NOT_EXIST = new Error('USER_DOES_NOT_EXIST');
+ERROR_DEVICE_DOES_NOT_EXIST = new Error('DEVICE_DOES_NOT_EXIST');
 ERROR_PASSWORD_INCORRECT = new Error('PASSWORD_INCORRECT');
 ERROR_INVALID_TOKEN = new Error('INVALID_TOKEN');
 
@@ -154,6 +156,37 @@ app.get('/devices', function(req, res, next) {
     });
 });
 
+
+var apnConnection = new apn.Connection({});
+
+app.post('/send', function(req, res, next) {
+    async.waterfall([
+        connectMongoDB,
+        async.apply(getDevice, req.user._id, req.body.device_id),
+        function(device, callback) {
+            if (device) {
+                var apnsDevice = new apn.Device(device.push_token);
+                var notification = new apn.Notification();
+                notification.expiry = Math.floor(Date.now() / 1000) + 3600;
+                notification.alert = req.body.file_name;
+                apnConnection.pushNotification(notification, apnsDevice);
+                callback(null, {});
+            } else {
+                callback(ERROR_DEVICE_DOES_NOT_EXIST);
+            }
+        }
+    ], function(err, result) {
+        if (err) {
+            return next(err);
+        } else {
+            res.json({
+                success: true,
+                result: result
+            });
+        }
+    });
+});
+
 app.use(function(err, req, res, next) {
     res.status(400).json({ 
         success: false,
@@ -193,8 +226,7 @@ var createUser = function(username, password, db, finalCallback) {
 };
 
 var registerDevice = function(userID, uuid, deviceName, pushToken, db, callback) {
-    var collection = db.collection(DEVICES_COLLECTION);
-    collection.insert({
+    db.collection(DEVICES_COLLECTION).insert({
         user_id: userID,
         _id: uuid,
         device_name: deviceName,
@@ -203,13 +235,20 @@ var registerDevice = function(userID, uuid, deviceName, pushToken, db, callback)
 };
 
 var getDevices = function(userID, db, callback) {
-    var collection = db.collection(DEVICES_COLLECTION);
-    var devices = collection.find({ user_id: userID }).map(function(device) {
+    var devices = db.collection(DEVICES_COLLECTION);
+    devices.find({ user_id: userID }).map(function(device) {
         return {
             uuid: device._id,
             device_name: device.device_name
         };
     }).toArray(callback);
+};
+
+var getDevice = function(userID, deviceID, db, callback) {
+    db.collection(DEVICES_COLLECTION).findOne({
+        user_id: userID,
+        _id: deviceID
+    }, callback);
 };
 
 // ######## HASHING #########
