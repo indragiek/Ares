@@ -12,6 +12,8 @@
 		7203D1C31C5DAD580011E3F0 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C21C5DAD580011E3F0 /* ConnectionManager.swift */; };
 		7203D1C41C5DAD580011E3F0 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C21C5DAD580011E3F0 /* ConnectionManager.swift */; };
 		7203D1C61C5DBA450011E3F0 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C51C5DBA450011E3F0 /* StatusItemController.swift */; };
+		7203D1CA1C5DE20F0011E3F0 /* DeviceName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C91C5DE20F0011E3F0 /* DeviceName.swift */; };
+		7203D1CB1C5DE20F0011E3F0 /* DeviceName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C91C5DE20F0011E3F0 /* DeviceName.swift */; };
 		721C793F1C5D41D1008EFF59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C793C1C5D41D1008EFF59 /* AppDelegate.swift */; };
 		721C79401C5D41D1008EFF59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 721C793D1C5D41D1008EFF59 /* Assets.xcassets */; };
 		721C79441C5D41DD008EFF59 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721C79421C5D41DD008EFF59 /* MainMenu.xib */; };
@@ -167,6 +169,7 @@
 		7203D1C11C5DA8F10011E3F0 /* Ares.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Ares.entitlements; sourceTree = "<group>"; };
 		7203D1C21C5DAD580011E3F0 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		7203D1C51C5DBA450011E3F0 /* StatusItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusItemController.swift; path = Mac/StatusItemController.swift; sourceTree = SOURCE_ROOT; };
+		7203D1C91C5DE20F0011E3F0 /* DeviceName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceName.swift; sourceTree = "<group>"; };
 		721C792C1C5D418C008EFF59 /* Ares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ares.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		721C793C1C5D41D1008EFF59 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Mac/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		721C793D1C5D41D1008EFF59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Mac/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -306,6 +309,7 @@
 				721C79F21C5D7969008EFF59 /* Keychain.swift */,
 				721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */,
 				7203D1C21C5DAD580011E3F0 /* ConnectionManager.swift */,
+				7203D1C91C5DE20F0011E3F0 /* DeviceName.swift */,
 			);
 			path = AresKit;
 			sourceTree = "<group>";
@@ -613,6 +617,7 @@
 				721C79DC1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */,
 				721C79D21C5D6514008EFF59 /* AccessToken.swift in Sources */,
 				721C79F31C5D7969008EFF59 /* Keychain.swift in Sources */,
+				7203D1CA1C5DE20F0011E3F0 /* DeviceName.swift in Sources */,
 				721C7A001C5D9505008EFF59 /* RegisteredDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -629,6 +634,7 @@
 				721C79DD1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */,
 				721C79D31C5D6514008EFF59 /* AccessToken.swift in Sources */,
 				721C79F41C5D7969008EFF59 /* Keychain.swift in Sources */,
+				7203D1CB1C5DE20F0011E3F0 /* DeviceName.swift in Sources */,
 				721C7A011C5D9505008EFF59 /* RegisteredDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
