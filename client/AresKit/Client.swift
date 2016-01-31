@@ -81,7 +81,8 @@ public final class Client {
         let request = Request(method: .POST, path: "/send", parameters: [
             "token": accessToken.token,
             "file_path": filePath,
-            "device_id": device.uuid
+            "to_id": device.uuid,
+            "from_id": deviceUUID
         ])
         print(request.parameters)
         requestVoid(request, completionHandler: completionHandler)

@@ -54,6 +54,8 @@
 		721C79FE1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79FD1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift */; };
 		721C7A001C5D9505008EFF59 /* RegisteredDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */; };
 		721C7A011C5D9505008EFF59 /* RegisteredDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */; };
+		7252DD691C5DF12C00E681E1 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252DD681C5DF12C00E681E1 /* PushNotification.swift */; };
+		7252DD6A1C5DF12C00E681E1 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252DD681C5DF12C00E681E1 /* PushNotification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +201,7 @@
 		721C79FA1C5D843E008EFF59 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = iOS/LoginViewController.xib; sourceTree = SOURCE_ROOT; };
 		721C79FD1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIAlertControllerExtensions.swift; path = iOS/UIAlertControllerExtensions.swift; sourceTree = SOURCE_ROOT; };
 		721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisteredDevice.swift; sourceTree = "<group>"; };
+		7252DD681C5DF12C00E681E1 /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +313,7 @@
 				721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */,
 				7203D1C21C5DAD580011E3F0 /* ConnectionManager.swift */,
 				7203D1C91C5DE20F0011E3F0 /* DeviceName.swift */,
+				7252DD681C5DF12C00E681E1 /* PushNotification.swift */,
 			);
 			path = AresKit;
 			sourceTree = "<group>";
@@ -609,6 +613,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7252DD691C5DF12C00E681E1 /* PushNotification.swift in Sources */,
 				721C79CC1C5D642F008EFF59 /* User.swift in Sources */,
 				721C79A61C5D62A3008EFF59 /* Client.swift in Sources */,
 				721C79D51C5D7276008EFF59 /* CreatedUser.swift in Sources */,
@@ -626,6 +631,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7252DD6A1C5DF12C00E681E1 /* PushNotification.swift in Sources */,
 				721C79CD1C5D642F008EFF59 /* User.swift in Sources */,
 				721C79A71C5D62A3008EFF59 /* Client.swift in Sources */,
 				721C79D61C5D7276008EFF59 /* CreatedUser.swift in Sources */,

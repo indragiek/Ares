@@ -27,6 +27,13 @@ public struct Device: CustomStringConvertible {
     
     public let registeredDevice: RegisteredDevice
     public let availability: Availability
+    internal let peerID: MCPeerID?
+    
+    internal init(registeredDevice: RegisteredDevice, availability: Availability, peerID: MCPeerID? = nil) {
+        self.registeredDevice = registeredDevice
+        self.availability = availability
+        self.peerID = peerID
+    }
 }
 
 private let ServiceType = "ares-ft";
@@ -40,6 +47,8 @@ private let DiscoveryUUIDKey = "uuid";
     private let advertiser: MCNearbyServiceAdvertiser
     private let browser: MCNearbyServiceBrowser
     private var peerIDToUUIDMap = [MCPeerID: String]()
+    private var UUIDToPeerIDMap = [String: MCPeerID]()
+    private var UUIDToNotificationMap = [String: [PushNotification]]()
     
     private(set) public var devices = [Device]() {
         didSet {
@@ -92,6 +101,22 @@ private let DiscoveryUUIDKey = "uuid";
         browser.stopBrowsingForPeers()
     }
     
+    public func queueNotification(notification: PushNotification) {
+        if let peerID = UUIDToPeerIDMap[notification.deviceUUID] {
+            requestTransferFromPeer(peerID, filePath: notification.filePath)
+        } else {
+            var notifications = UUIDToNotificationMap[notification.deviceUUID] ?? []
+            notifications.append(notification)
+            UUIDToNotificationMap[notification.deviceUUID] = notifications
+        }
+    }
+    
+    // MARK: Transfers
+    
+    func requestTransferFromPeer(peerID: MCPeerID, filePath: String) {
+        print("Requesting transfer from \(peerID) for \(filePath)")
+    }
+    
     // MARK: MCNearbyServiceAdvertiserDelegate
     
     public func advertiser(advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: NSError) {
@@ -112,8 +137,16 @@ private let DiscoveryUUIDKey = "uuid";
         guard let (index, device) = findDeviceWithUUID(uuid) else { return }
         
         peerIDToUUIDMap[peerID] = uuid
-        let newDevice = Device(registeredDevice: device.registeredDevice, availability: .Local)
+        UUIDToPeerIDMap[uuid] = peerID
+        
+        let newDevice = Device(registeredDevice: device.registeredDevice, availability: .Local, peerID: peerID)
         devices[index] = newDevice
+        
+        if let notifications = UUIDToNotificationMap[uuid] {
+            for notification in notifications {
+                requestTransferFromPeer(peerID, filePath: notification.filePath)
+            }
+        }
     }
     
     public func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
@@ -121,6 +154,8 @@ private let DiscoveryUUIDKey = "uuid";
         guard let (index, device) = findDeviceWithUUID(uuid) else { return }
         
         peerIDToUUIDMap.removeValueForKey(peerID)
+        UUIDToPeerIDMap.removeValueForKey(uuid)
+        
         let newDevice = Device(registeredDevice: device.registeredDevice, availability: .None)
         devices[index] = newDevice
     }

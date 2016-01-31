@@ -12,6 +12,7 @@ import AresKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var apnsManager: APNSManager!
+    private var viewController: ViewController!
     
     var window: UIWindow?
 
@@ -26,10 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         apnsManager = APNSManager()
         let client = Client(URL: NSURL(string: "https://ares-server.herokuapp.com")!)
         let credentialStorage = CredentialStorage.sharedInstance
-        let viewController = ViewController(client: client, credentialStorage: credentialStorage, apnsManager: apnsManager)
+        viewController = ViewController(client: client, credentialStorage: credentialStorage, apnsManager: apnsManager)
         
         window?.rootViewController = UINavigationController(rootViewController: viewController)
         window?.makeKeyAndVisible()
+        
+        if let payload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject: AnyObject],
+            notification = PushNotification(payload: payload) {
+            viewController.handlePushNotification(notification)
+        }
         
         return true
     }
@@ -40,5 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         print(error)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        guard let notification = PushNotification(payload: userInfo) else { return }
+        viewController.handlePushNotification(notification)
     }
 }
