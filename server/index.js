@@ -166,6 +166,8 @@ app.post('/send', function(req, res, next) {
         async.apply(getDevice, req.user._id, req.body.device_id),
         function(device, callback) {
             if (device) {
+                console.log("TESTING LOGGING");
+                console.log(device);
                 var apnsDevice = new apn.Device(device.push_token);
                 var notification = new apn.Notification();
                 var filePath = req.body.file_path;
