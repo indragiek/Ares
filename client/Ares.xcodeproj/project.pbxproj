@@ -43,6 +43,9 @@
 		721C79F41C5D7969008EFF59 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79F21C5D7969008EFF59 /* Keychain.swift */; };
 		721C79F71C5D8404008EFF59 /* LoginWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79F51C5D8404008EFF59 /* LoginWindowController.swift */; };
 		721C79F81C5D8404008EFF59 /* LoginWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721C79F61C5D8404008EFF59 /* LoginWindowController.xib */; };
+		721C79FB1C5D843E008EFF59 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79F91C5D843E008EFF59 /* LoginViewController.swift */; };
+		721C79FC1C5D843E008EFF59 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721C79FA1C5D843E008EFF59 /* LoginViewController.xib */; };
+		721C79FE1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79FD1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +182,9 @@
 		721C79F21C5D7969008EFF59 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keychain.swift; path = External/KeychainAccess/Lib/KeychainAccess/Keychain.swift; sourceTree = SOURCE_ROOT; };
 		721C79F51C5D8404008EFF59 /* LoginWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginWindowController.swift; path = Mac/LoginWindowController.swift; sourceTree = SOURCE_ROOT; };
 		721C79F61C5D8404008EFF59 /* LoginWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginWindowController.xib; path = Mac/LoginWindowController.xib; sourceTree = SOURCE_ROOT; };
+		721C79F91C5D843E008EFF59 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = iOS/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
+		721C79FA1C5D843E008EFF59 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = iOS/LoginViewController.xib; sourceTree = SOURCE_ROOT; };
+		721C79FD1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIAlertControllerExtensions.swift; path = iOS/UIAlertControllerExtensions.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +270,9 @@
 				721C79741C5D428E008EFF59 /* ViewController.swift */,
 				721C79791C5D4294008EFF59 /* LaunchScreen.storyboard */,
 				721C797B1C5D4294008EFF59 /* Main.storyboard */,
+				721C79F91C5D843E008EFF59 /* LoginViewController.swift */,
+				721C79FA1C5D843E008EFF59 /* LoginViewController.xib */,
+				721C79FD1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift */,
 			);
 			name = iOS;
 			path = "Ares-iOS";
@@ -523,6 +532,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				721C79FC1C5D843E008EFF59 /* LoginViewController.xib in Resources */,
 				721C797D1C5D4294008EFF59 /* LaunchScreen.storyboard in Resources */,
 				721C79761C5D428E008EFF59 /* Assets.xcassets in Resources */,
 				721C797E1C5D4294008EFF59 /* Main.storyboard in Resources */,
@@ -559,7 +569,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				721C79FB1C5D843E008EFF59 /* LoginViewController.swift in Sources */,
 				721C79781C5D428E008EFF59 /* ViewController.swift in Sources */,
+				721C79FE1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift in Sources */,
 				721C79751C5D428E008EFF59 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
