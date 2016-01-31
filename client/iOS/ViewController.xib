@@ -7,9 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="Ares" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="YoV-rR-7Zh" id="XYs-Q6-MLn"/>
+                <outlet property="determinateProgressStackView" destination="Yhp-K7-xtB" id="t4c-mr-qgg"/>
+                <outlet property="indeterminateProgressStackView" destination="SUu-gm-0oC" id="LgD-Vg-9db"/>
                 <outlet property="placeholderImageView" destination="fZQ-Qi-qwp" id="xux-nB-7NF"/>
                 <outlet property="progressLabel" destination="goG-Ov-0c2" id="h0G-bY-gfW"/>
-                <outlet property="progressStackView" destination="Yhp-K7-xtB" id="9wp-g8-8lm"/>
                 <outlet property="progressView" destination="bhM-RB-Vvi" id="999-8O-XJP"/>
                 <outlet property="view" destination="iN0-l3-epB" id="BoZ-1s-b3y"/>
             </connections>
@@ -20,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Yhp-K7-xtB">
-                    <rect key="frame" x="30" y="194" width="540" height="33"/>
+                    <rect key="frame" x="30" y="195" width="540" height="33"/>
                     <subviews>
                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bhM-RB-Vvi">
                             <rect key="frame" x="0.0" y="0.0" width="540" height="2"/>
@@ -28,7 +30,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Receiving..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goG-Ov-0c2">
                             <rect key="frame" x="0.0" y="12" width="540" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -36,12 +38,28 @@
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="fZQ-Qi-qwp">
                     <rect key="frame" x="180" y="248" width="240" height="104"/>
                 </imageView>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SUu-gm-0oC">
+                    <rect key="frame" x="124" y="185" width="174" height="51"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YoV-rR-7Zh">
+                            <rect key="frame" x="77" y="0.0" width="20" height="20"/>
+                        </activityIndicatorView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Waiting for discovery..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEx-yh-VI8">
+                            <rect key="frame" x="0.0" y="30" width="174" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="SUu-gm-0oC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1x8-c0-oXU"/>
                 <constraint firstItem="Yhp-K7-xtB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Bau-KP-WsA"/>
                 <constraint firstItem="Yhp-K7-xtB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="FdB-Id-WFk"/>
                 <constraint firstAttribute="trailing" secondItem="Yhp-K7-xtB" secondAttribute="trailing" constant="30" id="QbE-VY-Rkj"/>
+                <constraint firstItem="SUu-gm-0oC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Vvy-JE-vls"/>
                 <constraint firstItem="fZQ-Qi-qwp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bfM-94-xPH"/>
                 <constraint firstItem="fZQ-Qi-qwp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hLS-ZX-603"/>
             </constraints>
