@@ -161,6 +161,7 @@
 /* Begin PBXFileReference section */
 		7203D1BD1C5D9F690011E3F0 /* APNSManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APNSManager.swift; path = iOS/APNSManager.swift; sourceTree = SOURCE_ROOT; };
 		7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDataExtensions.swift; path = iOS/NSDataExtensions.swift; sourceTree = SOURCE_ROOT; };
+		7203D1C11C5DA8F10011E3F0 /* Ares.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Ares.entitlements; sourceTree = "<group>"; };
 		721C792C1C5D418C008EFF59 /* Ares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ares.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		721C793C1C5D41D1008EFF59 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Mac/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		721C793D1C5D41D1008EFF59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Mac/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -233,6 +234,7 @@
 		721C79231C5D418C008EFF59 = {
 			isa = PBXGroup;
 			children = (
+				7203D1C11C5DA8F10011E3F0 /* Ares.entitlements */,
 				721C79A81C5D6397008EFF59 /* External */,
 				721C792E1C5D418C008EFF59 /* Mac */,
 				721C79601C5D426C008EFF59 /* iOS */,
@@ -433,9 +435,16 @@
 				TargetAttributes = {
 					721C792B1C5D418C008EFF59 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = H73VKH7W9W;
 					};
 					721C795E1C5D426C008EFF59 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = H73VKH7W9W;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					721C79831C5D42DE008EFF59 = {
 						CreatedOnToolsVersion = 7.3;
@@ -744,12 +753,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.indragie.Ares;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.indragie.ares-mac";
 				PRODUCT_NAME = Ares;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -759,12 +771,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.indragie.Ares;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.indragie.ares-mac";
 				PRODUCT_NAME = Ares;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -773,12 +788,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Ares.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.indragie.Ares-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.indragie.ares;
 				PRODUCT_NAME = Ares;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -790,12 +807,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Ares.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.indragie.Ares-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.indragie.ares;
 				PRODUCT_NAME = Ares;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
