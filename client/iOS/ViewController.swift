@@ -15,6 +15,7 @@ class ViewController: UIViewController, LoginViewControllerDelegate {
     private let client: Client
     
     private var connectionManager: ConnectionManager?
+    private var queuedPushNotifications = [PushNotification]()
     
     init(client: Client, credentialStorage: CredentialStorage, apnsManager: APNSManager) {
         self.client = client
@@ -56,8 +57,21 @@ class ViewController: UIViewController, LoginViewControllerDelegate {
         let connectionManager = ConnectionManager(client: client, token: token)
         connectionManager.getDeviceList {
             connectionManager.startMonitoring()
+            
+            self.queuedPushNotifications.forEach(connectionManager.queueNotification)
+            self.queuedPushNotifications.removeAll()
         }
         self.connectionManager = connectionManager
+    }
+    
+    // MARK: Notification Handling
+    
+    func handlePushNotification(notification: PushNotification) {
+        if let connectionManager = connectionManager {
+            connectionManager.queueNotification(notification)
+        } else {
+            queuedPushNotifications.append(notification)
+        }
     }
     
     // MARK: LoginViewControllerDelegae
