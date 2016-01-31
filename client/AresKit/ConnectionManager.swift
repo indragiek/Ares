@@ -196,6 +196,7 @@ private let DiscoveryUUIDKey = "uuid";
             for notification in notifications {
                 requestTransferFromPeer(peerID, filePath: notification.filePath)
             }
+            UUIDToNotificationMap.removeValueForKey(uuid)
         }
     }
     
