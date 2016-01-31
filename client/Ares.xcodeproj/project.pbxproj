@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7203D1BE1C5D9F690011E3F0 /* APNSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1BD1C5D9F690011E3F0 /* APNSManager.swift */; };
 		7203D1C01C5DA0CD0011E3F0 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */; };
+		7203D1C31C5DAD580011E3F0 /* DevicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C21C5DAD580011E3F0 /* DevicesManager.swift */; };
+		7203D1C41C5DAD580011E3F0 /* DevicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203D1C21C5DAD580011E3F0 /* DevicesManager.swift */; };
 		721C793F1C5D41D1008EFF59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C793C1C5D41D1008EFF59 /* AppDelegate.swift */; };
 		721C79401C5D41D1008EFF59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 721C793D1C5D41D1008EFF59 /* Assets.xcassets */; };
 		721C79441C5D41DD008EFF59 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721C79421C5D41DD008EFF59 /* MainMenu.xib */; };
@@ -162,6 +164,7 @@
 		7203D1BD1C5D9F690011E3F0 /* APNSManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APNSManager.swift; path = iOS/APNSManager.swift; sourceTree = SOURCE_ROOT; };
 		7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDataExtensions.swift; path = iOS/NSDataExtensions.swift; sourceTree = SOURCE_ROOT; };
 		7203D1C11C5DA8F10011E3F0 /* Ares.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Ares.entitlements; sourceTree = "<group>"; };
+		7203D1C21C5DAD580011E3F0 /* DevicesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesManager.swift; sourceTree = "<group>"; };
 		721C792C1C5D418C008EFF59 /* Ares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ares.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		721C793C1C5D41D1008EFF59 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Mac/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		721C793D1C5D41D1008EFF59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Mac/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -299,6 +302,7 @@
 				721C79DB1C5D78B7008EFF59 /* CredentialStorage.swift */,
 				721C79F21C5D7969008EFF59 /* Keychain.swift */,
 				721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */,
+				7203D1C21C5DAD580011E3F0 /* DevicesManager.swift */,
 			);
 			path = AresKit;
 			sourceTree = "<group>";
@@ -600,6 +604,7 @@
 				721C79CC1C5D642F008EFF59 /* User.swift in Sources */,
 				721C79A61C5D62A3008EFF59 /* Client.swift in Sources */,
 				721C79D51C5D7276008EFF59 /* CreatedUser.swift in Sources */,
+				7203D1C31C5DAD580011E3F0 /* DevicesManager.swift in Sources */,
 				721C79CF1C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */,
 				721C79DC1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */,
 				721C79D21C5D6514008EFF59 /* AccessToken.swift in Sources */,
@@ -615,6 +620,7 @@
 				721C79CD1C5D642F008EFF59 /* User.swift in Sources */,
 				721C79A71C5D62A3008EFF59 /* Client.swift in Sources */,
 				721C79D61C5D7276008EFF59 /* CreatedUser.swift in Sources */,
+				7203D1C41C5DAD580011E3F0 /* DevicesManager.swift in Sources */,
 				721C79D01C5D64F2008EFF59 /* JSONDeserializable.swift in Sources */,
 				721C79DD1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */,
 				721C79D31C5D6514008EFF59 /* AccessToken.swift in Sources */,

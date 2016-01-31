@@ -75,6 +75,13 @@ public final class Client {
         requestModel(request, completionHandler: completionHandler)
     }
     
+    public func getDevices(accessToken: AccessToken, completionHandler: Result<[RegisteredDevice], NSError> -> Void) {
+        let request = Request(method: .GET, path: "/devices", parameters: [
+            "token": accessToken.token
+        ])
+        requestModelArray(request, completionHandler: completionHandler)
+    }
+    
     var deviceUUID: String {
         let ud = NSUserDefaults.standardUserDefaults()
         let UUID: String
@@ -109,7 +116,7 @@ public final class Client {
         requestJSON(request) { result in
             switch result {
             case let .Success(json):
-                if let model = T(JSON: json) {
+                if let json = json as? JSONDictionary, model = T(JSON: json) {
                     completionHandler(.Success(model))
                 } else {
                     completionHandler(.Failure(self.dynamicType.InvalidJSONResponseError))
@@ -120,7 +127,31 @@ public final class Client {
         }
     }
     
-    private func requestJSON(request: Request, completionHandler: Result<JSONDictionary, NSError> -> Void) {
+    private func requestModelArray<T: JSONDeserializable>(request: Request, completionHandler: Result<[T], NSError> -> Void) {
+        requestJSON(request) { result in
+            switch result {
+            case let .Success(json):
+                if let jsonArray = json as? [JSONDictionary] {
+                    var models = [T]()
+                    for deviceDict in jsonArray {
+                        if let model = T(JSON: deviceDict) {
+                            models.append(model)
+                        } else {
+                            completionHandler(.Failure(self.dynamicType.InvalidJSONResponseError))
+                            return
+                        }
+                    }
+                    completionHandler(.Success(models))
+                } else {
+                    completionHandler(.Failure(self.dynamicType.InvalidJSONResponseError))
+                }
+            case let .Failure(error):
+                completionHandler(.Failure(error))
+            }
+        }
+    }
+    
+    private func requestJSON(request: Request, completionHandler: Result<AnyObject, NSError> -> Void) {
         guard let components = NSURLComponents(URL: URL, resolvingAgainstBaseURL: false) else {
             fatalError("Invalid API base URL: \(URL)")
         }
@@ -135,7 +166,7 @@ public final class Client {
                     if let json = responseObject as? JSONDictionary {
                         print(json)
                         if let success = json["success"] as? Bool,
-                               result = json["result"] as? JSONDictionary where success {
+                               result = json["result"] where success {
                             completionHandler(.Success(result))
                         } else {
                             let error = self.dynamicType.constructAPIErrorFromJSON(json)

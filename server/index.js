@@ -138,6 +138,21 @@ app.post('/register_device', function(req, res, next) {
     });
 });
 
+app.get('/devices', function(req, res, next) {
+    async.waterfall([
+        connectMongoDB,
+        async.apply(getDevices, req.user._id)
+    ], function(err, result) {
+        if (err) {
+            return next(err);
+        } else {
+            res.json({
+                success: true,
+                result: result
+            });
+        }
+    });
+});
 
 app.use(function(err, req, res, next) {
     res.status(400).json({ 
@@ -185,6 +200,16 @@ var registerDevice = function(userID, uuid, deviceName, pushToken, db, callback)
         device_name: deviceName,
         push_token: pushToken
     }, callback);
+};
+
+var getDevices = function(userID, db, callback) {
+    var collection = db.collection(DEVICES_COLLECTION);
+    var devices = collection.find({ user_id: userID }).map(function(device) {
+        return {
+            uuid: device._id,
+            device_name: device.device_name
+        };
+    }).toArray(callback);
 };
 
 // ######## HASHING #########
