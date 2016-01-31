@@ -85,7 +85,10 @@ import AresKit
     // MARK: OutgoingFileTransferDelegate
     
     func outgoingFileTransfer(transfer: OutgoingFileTransfer, didStartWithProgress progress: NSProgress) {
-        print("Sending \(transfer.context.filePath) with \(progress)")
+        let notification = NSUserNotification()
+        notification.title = "File Transfer Started"
+        notification.informativeText = "\(transfer.context.filePath)"
+        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
     }
     
     func outgoingFileTransfer(transfer: OutgoingFileTransfer, didFailWithError error: NSError) {
@@ -93,7 +96,10 @@ import AresKit
     }
     
     func outgoingFileTransferDidComplete(transfer: OutgoingFileTransfer) {
-        print("Sending \(transfer.context.filePath) succeeded")
+        let notification = NSUserNotification()
+        notification.title = "File Transfer Complete"
+        notification.informativeText = "\(transfer.context.filePath)"
+        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
     }
     
     // MARK: Drag and Drop
