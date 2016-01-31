@@ -115,7 +115,6 @@ import AresKit
                         }
                     }
                 }
-                print(files)
                 return true
             }
         }
