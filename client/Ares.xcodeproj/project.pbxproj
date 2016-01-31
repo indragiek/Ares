@@ -65,6 +65,7 @@
 		7252DD7A1C5E0F5A00E681E1 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7252DD791C5E0F5A00E681E1 /* ViewController.xib */; };
 		7252DD841C5E127A00E681E1 /* KVOController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7252DD811C5E126D00E681E1 /* KVOController.framework */; };
 		7252DD851C5E127A00E681E1 /* KVOController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7252DD811C5E126D00E681E1 /* KVOController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7252DD891C5E14AA00E681E1 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7252DD881C5E14AA00E681E1 /* PreviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,7 @@
 		7252DD761C5DFD4400E681E1 /* OutgoingFileTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingFileTransfer.swift; sourceTree = "<group>"; };
 		7252DD791C5E0F5A00E681E1 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController.xib; path = iOS/ViewController.xib; sourceTree = SOURCE_ROOT; };
 		7252DD7B1C5E126D00E681E1 /* DynamicFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DynamicFramework.xcodeproj; path = External/KVOController/DynamicFramework.xcodeproj; sourceTree = "<group>"; };
+		7252DD881C5E14AA00E681E1 /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreviewViewController.swift; path = iOS/PreviewViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +333,7 @@
 				7203D1BD1C5D9F690011E3F0 /* APNSManager.swift */,
 				7203D1BF1C5DA0CD0011E3F0 /* NSDataExtensions.swift */,
 				7252DD791C5E0F5A00E681E1 /* ViewController.xib */,
+				7252DD881C5E14AA00E681E1 /* PreviewViewController.swift */,
 			);
 			name = iOS;
 			path = "Ares-iOS";
@@ -673,6 +676,7 @@
 			files = (
 				721C79FB1C5D843E008EFF59 /* LoginViewController.swift in Sources */,
 				721C79781C5D428E008EFF59 /* ViewController.swift in Sources */,
+				7252DD891C5E14AA00E681E1 /* PreviewViewController.swift in Sources */,
 				7203D1C01C5DA0CD0011E3F0 /* NSDataExtensions.swift in Sources */,
 				721C79FE1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift in Sources */,
 				7203D1BE1C5D9F690011E3F0 /* APNSManager.swift in Sources */,

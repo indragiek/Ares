@@ -18,6 +18,7 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
     
     private var connectionManager: ConnectionManager?
     private var queuedPushNotifications = [PushNotification]()
+    private var temporaryFileURL: NSURL?
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var progressLabel: UILabel!
@@ -126,6 +127,30 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
     }
     
     func incomingFileTransfer(transfer: IncomingFileTransfer, didReceiveFileWithName name: String, URL: NSURL) {
-        print("Received \(name) at \(URL)")
+        if let _ = presentedViewController {
+            dismissViewControllerAnimated(true) {
+                self.showPreviewControllerForFileName(name, URL: URL)
+            }
+        } else {
+            showPreviewControllerForFileName(name, URL: URL)
+        }
+    }
+    
+    private func showPreviewControllerForFileName(name: String, URL: NSURL) {
+        guard let directoryURL = URL.URLByDeletingLastPathComponent else { return }
+        let fixedURL = directoryURL.URLByAppendingPathComponent(name)
+        
+        let fm = NSFileManager.defaultManager()
+        do { try fm.removeItemAtURL(fixedURL) } catch _ {}
+        do {
+            try fm.moveItemAtURL(URL, toURL: fixedURL)
+        } catch let error {
+            fatalError("Error moving \(URL) to \(fixedURL): \(error)")
+        }
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            let previewController = PreviewViewController(fileName: name, URL: fixedURL)
+            self.presentViewController(previewController, animated: true, completion: nil)
+        }
     }
 }
