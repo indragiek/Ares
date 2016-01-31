@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         apnsManager = APNSManager()
-        let client = Client(URL: NSURL(string: "http://localhost:5000")!)
+        let client = Client(URL: NSURL(string: "https://ares-server.herokuapp.com")!)
         let credentialStorage = CredentialStorage.sharedInstance
         let viewController = ViewController(client: client, credentialStorage: credentialStorage, apnsManager: apnsManager)
         
