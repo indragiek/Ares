@@ -25,7 +25,9 @@ import AresKit
         super.init()
         
         connectionManager.delegate = self
-        connectionManager.getDeviceList()
+        connectionManager.getDeviceList {
+            self.connectionManager.startMonitoring()
+        }
         
         if let button = statusItem.button {
             button.title = "🚀"
@@ -34,6 +36,10 @@ import AresKit
                 window.delegate = self
             }
         }
+    }
+    
+    deinit {
+        connectionManager.stopMonitoring()
     }
     
     // MARK: ConnectionManagerDelegate
@@ -45,9 +51,24 @@ import AresKit
             if registeredDevice.uuid == client.deviceUUID {
                 continue
             }
-            menu.addItemWithTitle(registeredDevice.deviceName, action: nil, keyEquivalent: "")
+            guard let item = menu.addItemWithTitle(registeredDevice.deviceName, action: "doNothing:", keyEquivalent: "") else { continue }
+            item.target = self
+            item.image = menuItemImageForDevice(device)
         }
         statusItem.menu = menu
+    }
+    
+    @objc private func doNothing(sender: AnyObject) {}
+    
+    private func menuItemImageForDevice(device: Device) -> NSImage? {
+        switch device.availability {
+        case .Local:
+            return NSImage(named: "green_orb")
+        case .Remote:
+            return NSImage(named: "yellow_orb")
+        case .None:
+            return NSImage(named: "red_orb")
+        }
     }
     
     func connectionManager(manager: ConnectionManager, didFailWithError error: NSError) {

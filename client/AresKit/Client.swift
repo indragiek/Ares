@@ -8,11 +8,6 @@
 
 import Foundation
 import Alamofire
-#if os(iOS)
-    import UIKit
-#elseif os(OSX)
-    import Cocoa
-#endif
 
 private let UserDefaultsDeviceUUIDKey = "deviceUUID";
 
@@ -61,7 +56,7 @@ public final class Client {
     public func registerDevice(accessToken: AccessToken, pushToken: String? = nil, completionHandler: Result<RegisteredDevice, NSError> -> Void) {
         var parameters = [
             "uuid": deviceUUID,
-            "device_name": deviceName,
+            "device_name": getDeviceName(),
             "token": accessToken.token
         ]
         if let pushToken = pushToken {
@@ -102,14 +97,6 @@ public final class Client {
             ud.setObject(UUID, forKey: UserDefaultsDeviceUUIDKey)
         }
         return UUID
-    }
-    
-    private var deviceName: String {
-        #if os(iOS)
-            return UIDevice.currentDevice().name
-        #elseif os(OSX)
-            return NSHost.currentHost().localizedName ?? "Computer With No Name"
-        #endif
     }
     
     // MARK: Primitives

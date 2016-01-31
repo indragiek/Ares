@@ -14,6 +14,8 @@ class ViewController: UIViewController, LoginViewControllerDelegate {
     private let apnsManager: APNSManager
     private let client: Client
     
+    private var connectionManager: ConnectionManager?
+    
     init(client: Client, credentialStorage: CredentialStorage, apnsManager: APNSManager) {
         self.client = client
         self.credentialStorage = credentialStorage
@@ -30,7 +32,9 @@ class ViewController: UIViewController, LoginViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if credentialStorage.activeToken == nil {
+        if let token = credentialStorage.activeToken {
+            completeSetupWithToken(token)
+        } else {
             dispatch_async(dispatch_get_main_queue()) {
                 self.presentLoginViewController()
             }
@@ -48,10 +52,20 @@ class ViewController: UIViewController, LoginViewControllerDelegate {
         presentViewController(navigationController, animated: true, completion: nil)
     }
     
+    private func completeSetupWithToken(token: AccessToken) {
+        let connectionManager = ConnectionManager(client: client, token: token)
+        connectionManager.getDeviceList {
+            connectionManager.startMonitoring()
+        }
+        self.connectionManager = connectionManager
+    }
+    
     // MARK: LoginViewControllerDelegae
     
     func loginViewController(controller: LoginViewController, authenticatedWithToken token: AccessToken) {
         credentialStorage.activeToken = token
+        completeSetupWithToken(token)
+        
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
