@@ -170,7 +170,7 @@ app.post('/send', function(req, res, next) {
                 var notification = new apn.Notification();
                 var filePath = req.body.file_path;
                 notification.alert = path.basename(filePath);
-                notification.payload = { 'path': filePath };
+                notification.payload = { 'device_id': device._id, 'path': filePath };
                 apnConnection.pushNotification(notification, apnsDevice);
                 callback(null, {});
             } else {
