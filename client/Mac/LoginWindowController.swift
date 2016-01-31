@@ -51,6 +51,19 @@ class LoginWindowController: NSWindowController {
         client.authenticate(user) { result in
             switch result {
             case let .Success(token):
+                self.registerDevice(token)
+            case let .Failure(error):
+                self.delegate?.loginWindowController(self, failedToAuthenticateWithError: error)
+            }
+        }
+    }
+    
+    private func registerDevice(token: AccessToken) {
+        guard let client = client else { return }
+        client.registerDevice(token) { result in
+            switch result {
+            case let .Success(device):
+                print(device)
                 self.delegate?.loginWindowController(self, authenticatedWithToken: token)
             case let .Failure(error):
                 self.delegate?.loginWindowController(self, failedToAuthenticateWithError: error)
@@ -58,3 +71,4 @@ class LoginWindowController: NSWindowController {
         }
     }
 }
+

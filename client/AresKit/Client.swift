@@ -8,6 +8,13 @@
 
 import Foundation
 import Alamofire
+#if os(iOS)
+    import UIKit
+#elseif os(OSX)
+    import Cocoa
+#endif
+
+private let UserDefaultsDeviceUUIDKey = "deviceUUID";
 
 public final class Client {
     public static let ErrorDomain = "AresKitClientErrorDomain"
@@ -49,6 +56,43 @@ public final class Client {
             ]
         )
         requestModel(request, completionHandler: completionHandler)
+    }
+    
+    public func registerDevice(accessToken: AccessToken, pushToken: String? = nil, completionHandler: Result<RegisteredDevice, NSError> -> Void) {
+        var parameters = [
+            "uuid": deviceUUID,
+            "device_name": deviceName,
+            "token": accessToken.token
+        ]
+        if let pushToken = pushToken {
+            parameters["push_token"] = pushToken
+        }
+        let request = Request(
+            method: .POST,
+            path: "/register_device",
+            parameters: parameters
+        )
+        requestModel(request, completionHandler: completionHandler)
+    }
+    
+    var deviceUUID: String {
+        let ud = NSUserDefaults.standardUserDefaults()
+        let UUID: String
+        if let storedUUID = ud.stringForKey(UserDefaultsDeviceUUIDKey) {
+            UUID = storedUUID
+        } else {
+            UUID = NSUUID().UUIDString
+            ud.setObject(UUID, forKey: UserDefaultsDeviceUUIDKey)
+        }
+        return UUID
+    }
+    
+    private var deviceName: String {
+        #if os(iOS)
+            return UIDevice.currentDevice().name
+        #elseif os(OSX)
+            return NSHost.currentHost().localizedName ?? "Computer With No Name"
+        #endif
     }
     
     // MARK: Primitives
@@ -125,6 +169,8 @@ private func localizedDescriptionForAPIError(error: String) -> String? {
         return "A user with the specified username does not exist.";
     case "PASSWORD_INCORRECT":
         return "The specified password is incorrect.";
+    case "INVALID_TOKEN":
+        return "The specified access token is invalid.";
     default: return nil
     }
 }

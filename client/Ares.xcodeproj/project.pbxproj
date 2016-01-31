@@ -46,6 +46,8 @@
 		721C79FB1C5D843E008EFF59 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79F91C5D843E008EFF59 /* LoginViewController.swift */; };
 		721C79FC1C5D843E008EFF59 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721C79FA1C5D843E008EFF59 /* LoginViewController.xib */; };
 		721C79FE1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79FD1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift */; };
+		721C7A001C5D9505008EFF59 /* RegisteredDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */; };
+		721C7A011C5D9505008EFF59 /* RegisteredDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +187,7 @@
 		721C79F91C5D843E008EFF59 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = iOS/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		721C79FA1C5D843E008EFF59 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = iOS/LoginViewController.xib; sourceTree = SOURCE_ROOT; };
 		721C79FD1C5D89A5008EFF59 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIAlertControllerExtensions.swift; path = iOS/UIAlertControllerExtensions.swift; sourceTree = SOURCE_ROOT; };
+		721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisteredDevice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +293,7 @@
 				721C79D41C5D7276008EFF59 /* CreatedUser.swift */,
 				721C79DB1C5D78B7008EFF59 /* CredentialStorage.swift */,
 				721C79F21C5D7969008EFF59 /* Keychain.swift */,
+				721C79FF1C5D9505008EFF59 /* RegisteredDevice.swift */,
 			);
 			path = AresKit;
 			sourceTree = "<group>";
@@ -587,6 +591,7 @@
 				721C79DC1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */,
 				721C79D21C5D6514008EFF59 /* AccessToken.swift in Sources */,
 				721C79F31C5D7969008EFF59 /* Keychain.swift in Sources */,
+				721C7A001C5D9505008EFF59 /* RegisteredDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,6 +606,7 @@
 				721C79DD1C5D78B7008EFF59 /* CredentialStorage.swift in Sources */,
 				721C79D31C5D6514008EFF59 /* AccessToken.swift in Sources */,
 				721C79F41C5D7969008EFF59 /* Keychain.swift in Sources */,
+				721C7A011C5D9505008EFF59 /* RegisteredDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

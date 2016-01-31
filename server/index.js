@@ -10,6 +10,7 @@ var jwt = require('jsonwebtoken');
 // ######## CONSTANTS #########
 
 USERS_COLLECTION = 'users';
+DEVICES_COLLECTION = 'devices';
 TOKEN_EXPIRY_SECONDS = 86400; // 24 hours
 ERROR_USER_EXISTS = new Error('USER_EXISTS');
 ERROR_USER_DOES_NOT_EXIST = new Error('USER_DOES_NOT_EXIST');
@@ -114,6 +115,30 @@ app.use(function(req, res, next) {
     }
 });
 
+app.post('/register_device', function(req, res, next) {
+    var userID = req.user._id;
+    var uuid = req.body.uuid;
+    var deviceName = req.body.device_name;
+    var pushToken = req.body.push_token;
+    async.waterfall([
+        connectMongoDB,
+        async.apply(registerDevice, userID, uuid, deviceName, pushToken)
+    ], function(err, result) {
+        if (err) {
+            return next(err);
+        } else {
+            res.json({
+                success: true,
+                result: {
+                    uuid: uuid,
+                    device_name: deviceName
+                }
+            });
+        }
+    });
+});
+
+
 app.use(function(err, req, res, next) {
     res.status(400).json({ 
         success: false,
@@ -150,6 +175,16 @@ var createUser = function(username, password, db, finalCallback) {
             }, callback);
         }
     ], finalCallback);
+};
+
+var registerDevice = function(userID, uuid, deviceName, pushToken, db, callback) {
+    var collection = db.collection(DEVICES_COLLECTION);
+    collection.insert({
+        user_id: userID,
+        _id: uuid,
+        device_name: deviceName,
+        push_token: pushToken
+    }, callback);
 };
 
 // ######## HASHING #########
