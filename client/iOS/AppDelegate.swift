@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.backgroundColor = .whiteColor()
+        
         apnsManager = APNSManager()
         let client = Client(URL: NSURL(string: "https://ares-server.herokuapp.com")!)
         let credentialStorage = CredentialStorage.sharedInstance

@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
         title = "Login"
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func constructUser() -> User {
         return User(username: usernameField.text ?? "", password: passwordField.text ?? "")
     }
