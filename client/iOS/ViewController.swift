@@ -29,6 +29,7 @@ class ViewController: UIViewController, LoginViewControllerDelegate, ConnectionM
     
     private var state = State.Default {
         didSet {
+            loadViewIfNeeded()
             switch state {
             case .Default:
                 placeholderImageView.hidden = false
