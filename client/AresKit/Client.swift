@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 
 private let UserDefaultsDeviceUUIDKey = "deviceUUID";
+private let DefaultAPIURL = NSURL(string: "http://yourappname.heroku.com")!
 
 public final class Client {
     public static let ErrorDomain = "AresKitClientErrorDomain"
@@ -22,7 +23,7 @@ public final class Client {
     private let manager: Manager
     private let URL: NSURL
     
-    public init(URL: NSURL, configuration: NSURLSessionConfiguration = .defaultSessionConfiguration()) {
+    public init(URL: NSURL = DefaultAPIURL, configuration: NSURLSessionConfiguration = .defaultSessionConfiguration()) {
         self.URL = URL
         self.manager = Manager(configuration: configuration)
     }

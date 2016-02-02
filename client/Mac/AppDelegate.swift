@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, LoginWindowControllerDelegat
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         credentialStorage = CredentialStorage.sharedInstance
-        client = Client(URL: NSURL(string: "https://ares-server.herokuapp.com")!)
+        client = Client()
         
         if let token = credentialStorage.activeToken {
             completeSetupWithToken(token)

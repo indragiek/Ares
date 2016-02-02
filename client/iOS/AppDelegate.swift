@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .whiteColor()
         
         apnsManager = APNSManager()
-        let client = Client(URL: NSURL(string: "https://ares-server.herokuapp.com")!)
+        let client = Client()
         let credentialStorage = CredentialStorage.sharedInstance
         viewController = ViewController(client: client, credentialStorage: credentialStorage, apnsManager: apnsManager)
         
